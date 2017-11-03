@@ -15,17 +15,15 @@ describe WcnScraper::Vacancy do
 
   let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB' }
 
-  describe 'instantiating' do
+  describe '#new' do
     subject(:vacancy) { described_class.new(url, html) }
 
-    specify { expect(vacancy.url).to eq(url) }
     specify { expect(vacancy.id).to eq('9908') }
-    specify { expect(vacancy.role_type).to eq('Operational Delivery,Prison Officer') }
+    specify { expect(vacancy.url).to eq(url) }
+    specify { expect(vacancy.title).to eq('201706: Prison Officer - HMP/YOI Downview') }
+    specify { expect(vacancy.role).to eq('prison-officer') }
     specify { expect(vacancy.salary).to eq('£31,453') }
-    specify { expect(vacancy.closing_date).to eq('7 Jul 2017') }
-
-    specify { expect(vacancy.prison).to eq('HMP/YOI Downview') }
-    specify { expect(vacancy.location.lat).to eq(51.3384631) }
-    specify { expect(vacancy.location.lng).to eq(-0.1880442) }
+    specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }
+    specify { expect(vacancy.closing_date).to eq(Date.new(2017, 7, 7)) }
   end
 end

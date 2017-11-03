@@ -4,7 +4,7 @@
 # to find a latitude and longitude for them.
 #
 # To use it, capture its output into a file and then post-process in a text
-# editor, then update the list in `lib/wcn_scraper/location.rb`
+# editor, then update the list in `lib/wcn_scraper/prison_locator.rb`
 #
 # NB: You will need a valid GOOGLE_MAPS_API_KEY in the environment.
 
