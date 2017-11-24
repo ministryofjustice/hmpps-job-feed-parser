@@ -38,7 +38,7 @@ module WcnScraper
       @prisons ||= begin
         prisons = title.split('-').last
         prisons = prisons.gsub(/ and /i, ' & ').split(/[,&]/).map(&:strip)
-        prisons.map { |p| PrisonLocator.find(p) }
+        prisons.map { |p| Prison.find(p) }
       end
     end
 

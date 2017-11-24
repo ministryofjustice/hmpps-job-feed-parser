@@ -1,5 +1,14 @@
 module WcnScraper
   class Prison
+    class PrisonNotFoundError < StandardError
+    end
+
+    def self.find(prison_name)
+      prison = PRISONS.find { |p| p[:name] == prison_name }
+      raise self::PrisonNotFoundError if prison.nil?
+      Prison.new(prison)
+    end
+
     attr_reader :name, :lat, :lng
 
     def initialize(params)

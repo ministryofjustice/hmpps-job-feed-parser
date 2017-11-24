@@ -1,8 +1,12 @@
 #!/usr/bin/env ruby
 
+require 'yaml'
+require 'rss'
 require_relative '../lib/wcn_scraper'
 
 RSS_URL = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed'
+
+PRISONS = YAML.load_file('data/prisons.yaml')
 
 def main
   feed = get_rss_content

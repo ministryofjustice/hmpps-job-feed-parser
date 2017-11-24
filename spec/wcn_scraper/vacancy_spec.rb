@@ -15,6 +15,12 @@ describe WcnScraper::Vacancy do
 
   let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB' }
 
+  before do
+    PRISONS = [
+      { name: 'HMP/YOI Downview', lat: 51.338463, lng: -0.188044 }
+    ].freeze
+  end
+
   describe '#new' do
     subject(:vacancy) { described_class.new(url, html) }
 
