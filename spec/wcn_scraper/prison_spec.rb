@@ -36,7 +36,8 @@ describe WcnScraper::Prison do
     context 'non-existent prison' do
       subject(:prison) { described_class.find('HMP Azkaban') }
 
-      specify { expect { prison }.to raise_error(WcnScraper::Prison::PrisonNotFoundError) }
+      specify { expect { prison }.to raise_error(WcnScraper::Prison::PrisonNotFoundError, 'HMP Azkaban does not exist') }
+
     end
   end
 end
