@@ -10,18 +10,6 @@ module WcnScraper
       @role = 'prison-officer' # hardcoded until other roles are introduced
     end
 
-    def attrs
-      {
-        url: url,
-        id: id,
-        title: title,
-        role: role,
-        salary: salary,
-        prisons: prisons,
-        closing_date: closing_date
-      }
-    end
-
     def id
       @id ||= get_string('Vacancy Id')
     end
