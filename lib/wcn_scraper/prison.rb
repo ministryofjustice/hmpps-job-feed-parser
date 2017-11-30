@@ -5,7 +5,7 @@ module WcnScraper
 
     def self.find(prison_name)
       prison = PRISONS.find { |p| p[:name] == prison_name }
-      raise self::PrisonNotFoundError, "#{prison_name} does not exist" if prison.nil?
+      raise self::PrisonNotFoundError, "#{prison_name} not found" if prison.nil?
       Prison.new(prison)
     end
 

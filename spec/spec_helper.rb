@@ -1,4 +1,5 @@
 require_relative '../lib/wcn_scraper'
+require_relative '../lib/vacancy_formatter'
 require 'rspec'
 
 RSpec.configure do |config|

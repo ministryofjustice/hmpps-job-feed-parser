@@ -30,6 +30,7 @@ describe WcnScraper::Vacancy do
     specify { expect(vacancy.role).to eq('prison-officer') }
     specify { expect(vacancy.salary).to eq('£31,453') }
     specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }
+    specify { expect(vacancy.closing_date).to be_a(Date) }
     specify { expect(vacancy.closing_date).to eq(Date.new(2017, 7, 7)) }
   end
 end
