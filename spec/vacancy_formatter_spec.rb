@@ -1,14 +1,16 @@
 require_relative 'spec_helper'
 
 describe VacancyFormatter do
-  let(:vacancies) {
-    PRISONS = [
-      { name: 'HMP/YOI Downview', lat: 51.338463, lng: -0.188044 },
-      { name: 'HMP/YOI Isle of Wight', lat: 50.713196, lng: -1.3076464 },
-      { name: 'HMP Littlehey', lat: 52.2805913, lng: -0.3122374 },
-      { name: 'HMP Stocken', lat: 52.7469327, lng: -0.5821626999999999 }
-    ].freeze
+  before do
+    stub_const('PRISONS', [
+        { name: 'HMP/YOI Downview', lat: 51.338463, lng: -0.188044 },
+        { name: 'HMP/YOI Isle of Wight', lat: 50.713196, lng: -1.3076464 },
+        { name: 'HMP Littlehey', lat: 52.2805913, lng: -0.3122374 },
+        { name: 'HMP Stocken', lat: 52.7469327, lng: -0.5821626999999999 }
+    ])
+  end
 
+  let(:vacancies) {
     [
       WcnScraper::Vacancy.new(
         'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB',

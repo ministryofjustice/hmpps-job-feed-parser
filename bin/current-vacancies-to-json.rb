@@ -12,8 +12,6 @@ PRISONS = YAML.load_file('data/prisons.yaml')
 def main
   feed = get_rss_content
   vacancies = filter_feed_items(feed, /prison.officer/i)
-  #vacancies += filter_feed_items(feed, /probation.officer/i)
-  #vacancies += filter_feed_items(feed, /probation.service.officer/i)
   output_vacancies vacancies
 end
 
