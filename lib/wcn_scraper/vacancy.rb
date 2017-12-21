@@ -23,11 +23,7 @@ module WcnScraper
     end
 
     def prisons
-      @prisons ||= begin
-        prisons = title.split('-').last
-        prisons = prisons.gsub(/ and /i, ' & ').split(/[,&]/).map(&:strip)
-        prisons.map { |p| Prison.find(p) }
-      end
+      @prisons ||= Prison.find_in_string(title)
     end
 
     def closing_date
