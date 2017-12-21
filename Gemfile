@@ -10,7 +10,6 @@ group :test do
   gem 'simplecov', require: false
 end
 
-
 group :development do
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false

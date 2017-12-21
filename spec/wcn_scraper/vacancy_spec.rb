@@ -2,15 +2,18 @@ require_relative '../spec_helper'
 
 describe WcnScraper::Vacancy do
   before do
-    stub_const('PRISONS', [
+    stub_const('PRISONS',
+      [
         { name: 'HMP/YOI Downview', lat: 51.338463, lng: -0.188044 },
         { name: 'HMP Littlehey', lat: 52.2805913, lng: -0.3122374 },
         { name: 'HMP Stocken', lat: 52.7469327, lng: -0.5821626999999999 }
-    ])
+      ])
   end
 
   describe '#new' do
     context 'vacancy with one prison' do
+      subject(:vacancy) { described_class.new(url, html) }
+
       let(:html) {
         <<~HTML
           <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201706: Prison Officer - HMP/YOI Downview<br/>
@@ -25,8 +28,6 @@ describe WcnScraper::Vacancy do
 
       let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB' }
 
-      subject(:vacancy) { described_class.new(url, html) }
-
       specify { expect(vacancy.id).to eq('9908') }
       specify { expect(vacancy.url).to eq(url) }
       specify { expect(vacancy.title).to eq('201706: Prison Officer - HMP/YOI Downview') }
@@ -39,6 +40,8 @@ describe WcnScraper::Vacancy do
     end
 
     context 'vacancy with two prisons' do
+      subject(:vacancy) { described_class.new(url, html) }
+
       let(:html) {
         <<~HTML
           <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Stocken<br/>
@@ -52,8 +55,6 @@ describe WcnScraper::Vacancy do
       }
 
       let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB' }
-
-      subject(:vacancy) { described_class.new(url, html) }
 
       specify { expect(vacancy.id).to eq('14225') }
       specify { expect(vacancy.url).to eq(url) }
