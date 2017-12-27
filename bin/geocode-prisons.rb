@@ -1,87 +1,57 @@
 #!/usr/bin/env ruby
 
 # This script takes a list of prison names and uses the Google geocoding API
-# to find a latitude and longitude for them.
+# to find a town name, latitude and longitude for them.
 #
-# To use it, capture its output into a file and then post-process in a text
-# editor, then update the list in `data/prisons.yaml`
+# Usage:
+#   1. Populate `data/prisons.txt` with a list of prison names.
+#   2. Set environment variable GOOGLE_MAPS_API_KEY
+#        export GOOGLE_MAPS_API_KEY=""
+#   3. Run this script from the main project directory:
+#        ruby bin/geocode-prisons.rb
+#   4. Assuming the script completes without errors, the geocoded data
+#      will be written to `data/prisons.yaml`
+#
+# Be aware that data from Google may not be completely accurate. Use this data
+# as a kick-starter, but expect errors.
 #
 # NB: You will need a valid GOOGLE_MAPS_API_KEY in the environment.
 
+require 'net/http'
+require 'cgi'
 require 'uri'
+require 'json'
+require 'yaml'
 
 # https://developers.google.com/maps/documentation/geocoding/intro#BYB
-api_key = ENV.fetch("GOOGLE_MAPS_API_KEY")
-url_template = 'https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=' + api_key
+API_KEY = ENV.fetch("GOOGLE_MAPS_API_KEY")
+URL_TEMPLATE = 'https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=' + API_KEY
 
-# This list comes from piping the pretty-printed output of the current vacancies script
-# through; `grep title | sed 's/.*HM/HM/'` plus a bit of manual cleaning up.
-# i.e. this is all the prisons that were mentioned in the vacancies on 03/07/17
-prisons = [
-  'HMP Berwyn',
-  'HMP Brixton',
-  'HMP Bure',
-  'HMP Cardiff',
-  'HMP Channings Wood',
-  'HMP Chelmsford',
-  'HMP Coldingley',
-  'HMP Dartmoor',
-  'HMP Eastwood Park',
-  'HMP Erlestoke',
-  'HMP Featherstone',
-  'HMP Grendon',
-  'HMP Guys Marsh',
-  'HMP Haverigg',
-  'HMP Hewell',
-  'HMP High Down',
-  'HMP Highpoint',
-  'HMP Hollesley Bay',
-  'HMP Humber',
-  'HMP Huntercombe',
-  'HMP Kirkham',
-  'HMP Leicester',
-  'HMP Leyhill',
-  'HMP Lincoln and IRC Morton Hall',
-  'HMP Littlehey',
-  'HMP Long Lartin',
-  'HMP Low Newton',
-  'HMP Maidstone',
-  'HMP Norwich',
-  'HMP Onley',
-  'HMP Ranby',
-  'HMP Stocken',
-  'HMP Swaleside',
-  'HMP The Mount',
-  'HMP Usk/Prescoed',
-  'HMP Wandsworth',
-  'HMP Wayland',
-  'HMP Whatton',
-  'HMP Whitemoor',
-  'HMP Winchester',
-  'HMP Woodhill',
-  'HMP/YOI Bedford',
-  'HMP/YOI Downview',
-  'HMP/YOI Drake Hall',
-  'HMP/YOI Foston Hall',
-  'HMP/YOI Isis',
-  'HMP/YOI Isle of Wight',
-  'HMP/YOI Lewes',
-  'HMP/YOI Send',
-  'HMP/YOI Wormwood Scrubs',
-  'HMYOI Aylesbury',
-  'HMYOI Cookham Wood',
-  'HMYOI Deerbolt',
-  'HMYOI Feltham',
-  'HMYOI Portland & IRC Verne',
-  'HMYOI Stoke Heath',
-  'HMYOI Swinfen Hall'
-]
+prisons = File.readlines('data/prisons.txt').map!(&:strip)
 
-prisons.each do |prison|
-  url = url_template % URI.encode(prison)
-  json = `curl #{url}`
-  puts "PRISON: #{prison}"
-  puts json
-  sleep 0.2  # don't exceed the usage quota for the google api
+def geocode(name)
+  sleep 0.1  # don't exceed the usage quota for the google api
+  url = URL_TEMPLATE % CGI.escape(name + ', UK')
+  json = Net::HTTP.get(URI.parse(url))
+  response = JSON.parse(json)
+  raise StandardError unless response['status'] == 'OK'
+  response['results'].first
 end
 
+prisons.map! do |prison|
+  puts prison
+  results = geocode(prison.gsub(' & YOI', ''))
+
+  town = results['address_components'].find { |c| c['types'].include? 'postal_town' }['long_name']
+  lat = results['geometry']['location']['lat']
+  lng = results['geometry']['location']['lng']
+
+  {
+    name: prison,
+    town: town,
+    lat: lat,
+    lng: lng
+  }
+end
+
+File.open('data/prisons.yaml', 'w') { |f| f.write prisons.to_yaml }
