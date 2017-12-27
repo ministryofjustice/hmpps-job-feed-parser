@@ -7,7 +7,7 @@ module WcnScraper
     def initialize(url, html)
       @url = url
       @html = html
-      @role = 'prison-officer' # hardcoded until other roles are introduced
+      @role = 'Prison Officer' # hardcoded until other roles are introduced
     end
 
     def id

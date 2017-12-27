@@ -4,10 +4,10 @@ describe VacancyFormatter do
   before do
     stub_const('PRISONS',
       [
-        { name: 'HMP/YOI Downview', lat: 51.338463, lng: -0.188044 },
-        { name: 'HMP/YOI Isle of Wight', lat: 50.713196, lng: -1.3076464 },
-        { name: 'HMP Littlehey', lat: 52.2805913, lng: -0.3122374 },
-        { name: 'HMP Stocken', lat: 52.7469327, lng: -0.5821626999999999 }
+        { name: 'HMP/YOI Downview', town: 'Sutton', lat: 51.338463, lng: -0.188044 },
+        { name: 'HMP/YOI Isle of Wight', town: 'Newport', lat: 50.713196, lng: -1.3076464 },
+        { name: 'HMP Littlehey', town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
+        { name: 'HMP Stocken', town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 }
       ])
   end
 
@@ -60,34 +60,38 @@ describe VacancyFormatter do
         [
           {
             title: '201706: Prison Officer - HMP/YOI Downview',
+            role: 'Prison Officer',
             salary: '£31,453',
             closing_date: '07/07/2017',
             prison_name: 'HMP/YOI Downview',
-            prison_location: { lat: 51.338463, lng: -0.188044 },
+            prison_location: { town: 'Sutton', lat: 51.338463, lng: -0.188044 },
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB'
           },
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            role: 'Prison Officer',
             salary: '£22,396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Littlehey',
-            prison_location: { lat: 52.2805913, lng: -0.3122374 },
+            prison_location: { town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
           },
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            role: 'Prison Officer',
             salary: '£22,396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Stocken',
-            prison_location: { lat: 52.7469327, lng: -0.5821626999999999 },
+            prison_location: { town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 },
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
           },
           {
             title: '201710: Prison Officer - HMP/YOI Isle of Wight',
+            role: 'Prison Officer',
             salary: '£22,396',
             closing_date: '30/11/2017',
             prison_name: 'HMP/YOI Isle of Wight',
-            prison_location: { lat: 50.713196, lng: -1.3076464 },
+            prison_location: { town: 'Newport', lat: 50.713196, lng: -1.3076464 },
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13634-201710-Prison-Officer-HMP-YOI-Isle-of-Wight/en-GB'
           }
         ]
@@ -126,10 +130,11 @@ describe VacancyFormatter do
         [
           {
             title: '201706: Prison Officer - HMP/YOI Downview',
+            role: 'Prison Officer',
             salary: '£31,453',
             closing_date: '07/07/2017',
             prison_name: 'HMP/YOI Downview',
-            prison_location: { lat: 51.338463, lng: -0.188044 },
+            prison_location: { town: 'Sutton', lat: 51.338463, lng: -0.188044 },
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB'
           }
         ]
@@ -166,18 +171,20 @@ describe VacancyFormatter do
         [
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            role: 'Prison Officer',
             salary: '£22,396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Littlehey',
-            prison_location: { lat: 52.2805913, lng: -0.3122374 },
+            prison_location: { town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
           },
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            role: 'Prison Officer',
             salary: '£22,396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Stocken',
-            prison_location: { lat: 52.7469327, lng: -0.5821626999999999 },
+            prison_location: { town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 },
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
           }
         ]
