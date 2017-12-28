@@ -172,3 +172,55 @@
 - :name: HMYOI Swinfen Hall
   :lat: 52.6525736
   :lng: -1.8066018
+- :name: HMP Nottingham
+  :lat: 52.984647
+  :lng: -1.155398
+- :name: HMP Manchester
+  :lat: 53.492718
+  :lng: -2.246503
+- :name: HMP Full Sutton
+  :lat: 53.985045
+  :lng: -0.869458
+- :name: HMYOI Rochester
+  :lat: 51.366399
+  :lng: 0.494247
+- :name: Medway Secure Training Centre
+  :lat: 51.361339
+  :lng: 0.494180
+- :name: HMYOI Hindley
+  :lat: 53.517865
+  :lng: -2.576909
+- :name: HMP Belmarsh
+  :lat: 51.496165
+  :lng: 0.093226
+- :name: HMYOI Wetherby
+  :lat: 53.935620
+  :lng: -1.369344
+- :name: HMYOI Werrington
+  :lat: 53.022738
+  :lng: -2.087198
+- :name: HMP Thorn Cross
+  :lat: 53.349092
+  :lng: -2.542015
+- :name: HMP Swansea
+  :lat: 51.615000
+  :lng: -3.949000
+- :name: HMP Lindholme
+  :lat: 53.544012
+  :lng: -0.970315
+- :name: HMP Moorland
+  :lat: 53.546555
+  :lng: -0.971499
+- :name: HMP Leeds
+  :lat: 53.795718
+  :lng: -1.575409
+- :name: HMP/YOI Askham Grange
+  :lat: 53.925909
+  :lng: -1.184137
+- :name: HMP Wealstun
+  :lat: 53.914477
+  :lng: -1.330345
+- :name: HMP New Hall
+  :lat: 53.635740
+  :lng: -1.610923
+

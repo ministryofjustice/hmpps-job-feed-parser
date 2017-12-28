@@ -12,12 +12,13 @@ PRISONS = YAML.load_file('data/prisons.yaml')
 def main
   feed = get_rss_content
   vacancies = filter_feed_items(feed, /prison.officer/i)
+  # vacancies = WcnScraper::RssFeed.new()
   output_vacancies vacancies
 end
 
 def get_rss_content
   # rss = Net::HTTP.get(URI.parse(RSS_URL))
-  rss = File.open('feed.xml')
+  rss = File.open('spec/fixtures/feed.xml')
   RSS::Parser.parse(rss)
 end
 
@@ -30,7 +31,7 @@ end
 def output_vacancies(vacancies)
   list = vacancies.collect do |vacancy|
     begin
-      WcnScraper::Vacancy.new(vacancy.id.base, vacancy.content.content).attrs()
+      WcnScraper::Vacancy.new(vacancy.id.base, vacancy.content.content)
     rescue WcnScraper::Prison::PrisonNotFoundError => error
       puts error.message
     end
