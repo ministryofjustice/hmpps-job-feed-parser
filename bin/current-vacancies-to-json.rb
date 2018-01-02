@@ -12,7 +12,9 @@ PRISONS = YAML.load_file('data/prisons.yaml')
 def main
   feed = get_rss_content
   vacancies = filter_feed_items(feed, /prison.officer/i)
-  output_vacancies vacancies
+  collection = WcnScraper::VacancyCollection.new(vacancies)
+  # collection.vacancies is an array of Vacancy objects (for valid vacancies)
+  # collection.invalid is an array of vacancies without a matching prison
 end
 
 def get_rss_content
@@ -25,18 +27,6 @@ def filter_feed_items(rss_feed, regexp)
   rss_feed.items.find_all do |item|
     !regexp.match(item.title.content).nil?
   end
-end
-
-def output_vacancies(vacancies)
-  list = vacancies.collect do |vacancy|
-    begin
-      WcnScraper::Vacancy.new(vacancy.id.base, vacancy.content.content).attrs()
-    rescue WcnScraper::Prison::PrisonNotFoundError => error
-      puts error.message
-    end
-  end
-  # puts list.to_json
-  pp list
 end
 
 main
