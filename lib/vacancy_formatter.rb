@@ -11,10 +11,11 @@ class VacancyFormatter
     vacancy.prisons.map do |prison|
       {
         title: vacancy.title,
+        role: vacancy.role,
         salary: vacancy.salary,
         closing_date: vacancy.closing_date.strftime('%d/%m/%Y'),
         prison_name: prison.name,
-        prison_location: { lat: prison.lat, lng: prison.lng },
+        prison_location: { town: prison.town, lat: prison.lat, lng: prison.lng },
         url: vacancy.url
       }
     end

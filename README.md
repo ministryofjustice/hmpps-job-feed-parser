@@ -1,7 +1,5 @@
 # Fetching jobs from WCN
 
-This has been deprecated in favour of [ministryofjustice/hmpps-job-feed-parser](https://github.com/ministryofjustice/hmpps-job-feed-parser).
-
 ## RSS
 
 WCN publish an RSS feed of all jobs, at;
@@ -45,17 +43,49 @@ The corresponding HTML page is here;
 https://justicejobs.tal.net/vx/lang-en-GB/mobile-0/appcentre-1/brand-2/xf-a5f8e63220f3/candidate/jobboard/vacancy/3/adv/?ftq=prison+officer
 ```
 
-# TODO
+## Output schema
 
-* Turn `salary` into a number (or a range)
+Structured job data will be output in the following format:
 
-Examples of real `salary` values;
-
+```json
+{
+  "title": "201710: Prison Officer - HMP/YOI Isle of Wight",
+  "role": "Prison Officer",
+  "salary": "£22,396",
+  "closing_date": "31/10/2017",
+  "prison_name": "HMP/YOI Isle of Wight",
+  "prison_location": {
+    "lat": 50.713196,
+    "lng": -1.3076464,
+    "town": "Newport"
+  },
+  "url": "https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13634-201710-Prison-Officer-HMP-YOI-Isle-of-Wight/en-GB"
+}
 ```
-For 41 hours a week, £32,843, For 39 hours a week, £31,453
-£26,456
-£28,456 - £29,403
-£29, 453
-```
 
-* Turn `closing_date` into a date
+| Field name | Type | Description |
+| ---------- | ---- | ----------- |
+| `title`    | String | The vacancy title. |
+| `role`     | String | The job role of this vacancy. This will always be 'Prison Officer', since that's the only role this script currently retrieves data for. |
+| `salary`   | String | The vacancy salary. This is untouched and passed through as a string. Do not attempt to treat this as a number, as it's unknown whether this always follows a predictable format. |
+| `closing_date` | Date (DD/MM/YYYY) | The vacancy closing date in DD/MM/YYYY format. |
+| `prison_name` | String | Name of the prison in which this vacancy exists. |
+| `prison_location` | Object | Object with sub-fields: |
+| `prison_location.lat` | Float | Latitude of the prison. |
+| `prison_location.lng` | Float | Longitude of the prison. |
+| `prison_location.town` | String | Name of the town in which the prison exists. |
+| `url` | String | URL of the vacancy details page. |
+
+### Vacancies in multiple prisons
+
+Vacancies in multiple prisons (e.g. cluster vacancies), one entry will be output for each prison.
+
+This will result in duplicate vacancy data being surfaced – once for each prison.
+
+If required, vacancies can be re-grouped by matching them against the URL. This will be unique per vacancy.
+
+### JSON file in S3
+
+This structured vacancy data will be output to a JSON file in an S3 bucket. This functionality has yet to be developed.
+
+This JSON file will contain an array of objects following the aforementioned output schema.
