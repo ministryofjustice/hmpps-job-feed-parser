@@ -89,3 +89,29 @@ If required, vacancies can be re-grouped by matching them against the URL. This 
 This structured vacancy data will be output to a JSON file in an S3 bucket. This functionality has yet to be developed.
 
 This JSON file will contain an array of objects following the aforementioned output schema.
+
+## Docker
+
+A `Dockerfile` is included in this project, meaning the application can be compiled into a docker image and run in a container.
+
+The docker image will execute the ruby script `bin/current-vacancies-to-json.rb`.
+
+### Build the docker image
+
+Run the following Terminal command from the main project directory to build the docker image:
+
+```bash
+docker build -t hmpps-job-feed-parser .
+```
+
+This will build an image based on the official ruby 2.4 image and install required gems. For more details, see `Dockerfile`.
+
+### Run the docker image
+
+Use the following Terminal command to run the docker image:
+
+```bash
+docker run hmpps-job-feed-parser
+```
+
+The container will execute the ruby script `bin/current-vacancies-to-json.rb` and then quit.
