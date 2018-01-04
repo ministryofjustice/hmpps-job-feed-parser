@@ -18,8 +18,8 @@ def main
 end
 
 def get_rss_content
-  # rss = Net::HTTP.get(URI.parse(RSS_URL))
-  rss = File.open('feed.xml')
+  rss = Net::HTTP.get(URI.parse(RSS_URL))
+  # rss = File.open('feed.xml')
   RSS::Parser.parse(rss)
 end
 
