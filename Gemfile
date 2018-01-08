@@ -16,4 +16,6 @@ group :development do
   gem 'rspec'
   gem 'rubocop'
   gem 'rubocop-rspec'
+  gem 'aws-sdk-s3'
+  gem 'logger'
 end
