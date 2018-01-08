@@ -12,7 +12,7 @@ class VacancyFormatter
       {
         title: vacancy.title,
         role: vacancy.role,
-        salary: vacancy.salary,
+        salary: vacancy.salary.delete('£').delete(','),
         closing_date: vacancy.closing_date.strftime('%d/%m/%Y'),
         prison_name: prison.name,
         prison_location: { town: prison.town, lat: prison.lat, lng: prison.lng },

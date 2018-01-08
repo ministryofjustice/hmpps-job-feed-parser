@@ -6,6 +6,8 @@ require 'pp'
 require_relative '../lib/wcn_scraper'
 require 'json'
 require_relative '../lib/vacancy_formatter'
+require 'logger'
+require 'aws-sdk-s3'
 
 RSS_URL = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed'
 
@@ -17,13 +19,17 @@ def main
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
   good_data_to_file(collection.vacancies)
+  write_data_to_s3
+  logger = Logger.new(STDOUT)
+  logger.info("good data size: %p" % collection.vacancies.size)
+  logger.info("bad data size: %p" % collection.invalid.size)
   # collection.vacancies is an array of Vacancy objects (for valid vacancies)
   # collection.invalid is an array of vacancies without a matching prison
 end
 
 def get_rss_content
-  # rss = Net::HTTP.get(URI.parse(RSS_URL))
-  rss = File.open('feed.xml')
+  rss = Net::HTTP.get(URI.parse(RSS_URL))
+  # rss = File.open('feed.xml')
   RSS::Parser.parse(rss)
 end
 
@@ -44,14 +50,10 @@ def bad_data_to_file(list)
   end
 end
 def write_data_to_s3
-  s3 = AWS::S3.new(
-      :access_key_id => 'YOUR_ACCESS_KEY_ID',
-      :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-
-  bucket = s3.buckets['my-s3-bucket-key']
-
-  object = bucket.objects[file_name]
-
-  object.write(Pathname.new(local_file_path))
+  s3 = Aws::S3::Resource.new(region:'eu-west-2')
+  obj = s3.bucket('hmpps-feed-parser').object('vacancies.json')
+  obj.upload_file('good-data.json')
+  obj = s3.bucket('hmpps-feed-parser').object('vacancies-bad-data.json')
+  obj.upload_file('bad-data.json')
 end
 main
