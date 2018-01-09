@@ -22,7 +22,7 @@ describe VacancyFormatter do
             <<~HTML
               <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201706: Prison Officer - HMP/YOI Downview<br/>
               Vacancy Id:9908<br/>
-              Role Type:Operational Delivery,Prison Officer<br/>
+              Role Type:Operational Delivery,prison officer<br/>
               Salary:£31,453<br/>
               Location:Sutton <br/>
               Closing Date:7 Jul 2017 23:55 BST<br/>
@@ -34,7 +34,7 @@ describe VacancyFormatter do
             <<~HTML
               <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Stocken<br/>
               Vacancy Id:14225<br/>
-              Role Type:Operational Delivery,Prison Officer<br/>
+              Role Type:Operational Delivery,prison officer<br/>
               Salary:£22,396<br/>
               Location:Huntingdon ,Oakham <br/>
               Closing Date:30 Nov 2017 23:55 GMT<br/>
@@ -46,7 +46,7 @@ describe VacancyFormatter do
             <<~HTML
               <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201710: Prison Officer - HMP/YOI Isle of Wight<br/>
               Vacancy Id:13634<br/>
-              Role Type:Operational Delivery,Prison Officer<br/>
+              Role Type:Operational Delivery,prison officer<br/>
               Salary:£22,396<br/>
               Location:Newport (Isle of Wight) <br/>
               Closing Date:30 Nov 2017 23:55 GMT<br/>
@@ -60,8 +60,8 @@ describe VacancyFormatter do
         [
           {
             title: '201706: Prison Officer - HMP/YOI Downview',
-            role: 'Prison Officer',
-            salary: '£31,453',
+            role: 'prison-officer',
+            salary: '31453',
             closing_date: '07/07/2017',
             prison_name: 'HMP/YOI Downview',
             prison_location: { town: 'Sutton', lat: 51.338463, lng: -0.188044 },
@@ -69,8 +69,8 @@ describe VacancyFormatter do
           },
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
-            role: 'Prison Officer',
-            salary: '£22,396',
+            role: 'prison-officer',
+            salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Littlehey',
             prison_location: { town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
@@ -78,8 +78,8 @@ describe VacancyFormatter do
           },
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
-            role: 'Prison Officer',
-            salary: '£22,396',
+            role: 'prison-officer',
+            salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Stocken',
             prison_location: { town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 },
@@ -87,8 +87,8 @@ describe VacancyFormatter do
           },
           {
             title: '201710: Prison Officer - HMP/YOI Isle of Wight',
-            role: 'Prison Officer',
-            salary: '£22,396',
+            role: 'prison-officer',
+            salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP/YOI Isle of Wight',
             prison_location: { town: 'Newport', lat: 50.713196, lng: -1.3076464 },
@@ -130,8 +130,8 @@ describe VacancyFormatter do
         [
           {
             title: '201706: Prison Officer - HMP/YOI Downview',
-            role: 'Prison Officer',
-            salary: '£31,453',
+            role: 'prison-officer',
+            salary: '31453',
             closing_date: '07/07/2017',
             prison_name: 'HMP/YOI Downview',
             prison_location: { town: 'Sutton', lat: 51.338463, lng: -0.188044 },
@@ -171,8 +171,8 @@ describe VacancyFormatter do
         [
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
-            role: 'Prison Officer',
-            salary: '£22,396',
+            role: 'prison-officer',
+            salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Littlehey',
             prison_location: { town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
@@ -180,8 +180,8 @@ describe VacancyFormatter do
           },
           {
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
-            role: 'Prison Officer',
-            salary: '£22,396',
+            role: 'prison-officer',
+            salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Stocken',
             prison_location: { town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 },
