@@ -11,11 +11,11 @@ group :test do
 end
 
 group :development do
+  gem 'aws-sdk-s3'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false
+  gem 'logger'
   gem 'rspec'
   gem 'rubocop'
   gem 'rubocop-rspec'
-  gem 'aws-sdk-s3'
-  gem 'logger'
 end

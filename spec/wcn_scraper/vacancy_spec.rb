@@ -18,7 +18,7 @@ describe WcnScraper::Vacancy do
         <<~HTML
           <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201706: Prison Officer - HMP/YOI Downview<br/>
           Vacancy Id:9908<br/>
-          Role Type:Operational Delivery,Prison Officer<br/>
+          Role Type:Operational Delivery,prison-officer<br/>
           Salary:£31,453<br/>
           Location:Sutton <br/>
           Closing Date:7 Jul 2017 23:55 BST<br/>
@@ -31,7 +31,7 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.id).to eq('9908') }
       specify { expect(vacancy.url).to eq(url) }
       specify { expect(vacancy.title).to eq('201706: Prison Officer - HMP/YOI Downview') }
-      specify { expect(vacancy.role).to eq('Prison Officer') }
+      specify { expect(vacancy.role).to eq('prison-officer') }
       specify { expect(vacancy.salary).to eq('£31,453') }
       specify { expect(vacancy.prisons.count).to eq(1) }
       specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }
@@ -46,7 +46,7 @@ describe WcnScraper::Vacancy do
         <<~HTML
           <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Stocken<br/>
           Vacancy Id:14225<br/>
-          Role Type:Operational Delivery,Prison Officer<br/>
+          Role Type:Operational Delivery,prison-officer<br/>
           Salary:£22,396<br/>
           Location:Huntingdon ,Oakham <br/>
           Closing Date:30 Nov 2017 23:55 GMT<br/>
@@ -59,7 +59,7 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.id).to eq('14225') }
       specify { expect(vacancy.url).to eq(url) }
       specify { expect(vacancy.title).to eq('201711: Prison Officer - HMP Littlehey & HMP Stocken') }
-      specify { expect(vacancy.role).to eq('Prison Officer') }
+      specify { expect(vacancy.role).to eq('prison-officer') }
       specify { expect(vacancy.salary).to eq('£22,396') }
       specify { expect(vacancy.prisons.count).to eq(2) }
       specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }

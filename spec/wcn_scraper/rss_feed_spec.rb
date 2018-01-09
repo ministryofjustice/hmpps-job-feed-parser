@@ -11,12 +11,12 @@ describe WcnScraper::RssFeed do
   end
 
   describe '#new' do
-    it 'should parse the ENDPOINT URI' do
+    it 'parses the ENDPOINT URI' do
       expect(URI).to receive(:parse).with('http://example.com').and_return(double.as_null_object)
       described_class.new
     end
 
-    it 'should fetch the parsed ENDPOINT URI' do
+    it 'fetches the parsed ENDPOINT URI' do
       expect(URI).to receive(:parse).and_return(instance_double(URI::HTTP))
       expect(Net::HTTP).to receive(:get).and_return(double)
       described_class.new
