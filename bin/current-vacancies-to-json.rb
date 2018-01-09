@@ -14,8 +14,10 @@ RSS_URL = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate
 PRISONS = YAML.load_file('data/prisons.yaml')
 
 def main
-  feed = get_rss_content
-  vacancies = filter_feed_items(feed, /prison.officer/i)
+  # feed = get_rss_content
+  # vacancies = filter_feed_items(feed, /prison.officer/i)
+  rssfeed = WcnScraper::RssFeed.new()
+  vacancies = rssfeed.get_vacancies_data
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
   good_data_to_file(collection.vacancies)
@@ -29,7 +31,7 @@ end
 
 def get_rss_content
   rss = Net::HTTP.get(URI.parse(RSS_URL))
-  # rss = File.open('feed.xml')
+  # xrss = File.open('feed.xml')
   RSS::Parser.parse(rss)
 end
 
