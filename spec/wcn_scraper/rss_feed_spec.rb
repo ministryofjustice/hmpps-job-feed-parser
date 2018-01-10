@@ -1,25 +1,17 @@
 require_relative '../spec_helper'
+require 'webmock/rspec'
 
 describe WcnScraper::RssFeed do
   it 'has an ENDPOINT constant' do
     expect(described_class::ENDPOINT).not_to be_empty
   end
 
-  before do
-    stub_const('WcnScraper::RssFeed::ENDPOINT', 'http://example.com')
-    allow(Net::HTTP).to receive(:get)
-  end
+  it 'should load an rss file' do
+    stub_request(:any, described_class::ENDPOINT).
+      to_return(body: File.open('./spec/fixtures/feed.xml'), status: 200)
 
-  describe '#new' do
-    it 'parses the ENDPOINT URI' do
-      expect(URI).to receive(:parse).with('http://example.com').and_return(double.as_null_object)
-      described_class.new
-    end
-
-    it 'fetches the parsed ENDPOINT URI' do
-      expect(URI).to receive(:parse).and_return(instance_double(URI::HTTP))
-      expect(Net::HTTP).to receive(:get).and_return(double)
-      described_class.new
-    end
+    rss_feed = WcnScraper::RssFeed.new()
+    vacancies = rss_feed.get_vacancies_data
+    expect(vacancies.count).to eq(54)
   end
 end
