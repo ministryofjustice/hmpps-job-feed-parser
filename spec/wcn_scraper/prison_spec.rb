@@ -62,12 +62,7 @@ describe WcnScraper::Prison do
       end
 
       it 'returns the correct prison' do
-        expect(prison.attrs).to eq(
-          name: 'HMP Brixton',
-          lat: 51.4516617,
-          lng: -0.1250917,
-          town: 'London'
-        )
+        expect(prison.attrs).to eq(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London')
       end
     end
 

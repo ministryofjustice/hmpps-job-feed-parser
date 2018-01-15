@@ -3,7 +3,7 @@ require 'rss'
 
 module WcnScraper
   class RssFeed
-    ENDPOINT = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed'
+    ENDPOINT = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed'.freeze
 
     def vacancies_data
       url = URI.parse(ENDPOINT)
