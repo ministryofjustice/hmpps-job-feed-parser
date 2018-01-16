@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed</id>
+  <link rel="self" href="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed" type="application/atom+xml"/>
+  <title>External Opportunities</title>
+  <author>
+    <name>Steria - MoJ</name>
+  </author>
+  <updated>2017-10-11T13:09:21Z</updated>
+  <link rel="alternate" href="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3" type="text/html"/>
+  <entry xml:base="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13638-201710-Prison-Officer-HMYOI-Cookham-Wood/en-GB">
+    <id>https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13638-201710-Prison-Officer-HMYOI-Cookham-Wood/en-GB</id>
+    <link rel="alternate" href="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13638-201710-Prison-Officer-HMYOI-Cookham-Wood/en-GB" type="text/html"/>
+    <title>201710: Prison Officer - HMYOI Cookham Wood</title>
+    <updated>2017-09-30T23:00:00Z</updated>
+    <published>2017-09-30T23:00:00Z</published>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201710: Prison Officer - HMYOI Cookham Wood<br/>
+        Vacancy Id:13638<br/>
+        Role Type:Operational Delivery,Prison Officer<br/>
+        Salary:£28,950<br/>
+        Location:Rochester <br/>
+        Closing Date:31 Oct 2017 23:55 GMT<br/>
+      </div>
+    </content>
+  </entry>
+  <entry xml:base="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/so/pm/1/pl/3/opp/13788-13788-Implementation-Advisor/en-GB">
+    <id>https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/so/pm/1/pl/3/opp/13788-13788-Implementation-Advisor/en-GB</id>
+    <link rel="alternate" href="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/so/pm/1/pl/3/opp/13788-13788-Implementation-Advisor/en-GB" type="text/html"/>
+    <title>13788 - A Record that does not include Pr1s0n 0ff1c3r</title>
+    <updated>2017-10-10T23:00:00Z</updated>
+    <published>2017-10-10T23:00:00Z</published>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:13788 - A Record that does not include Pr1s0n 0ff1c3r<br/>
+        Vacancy Id:13788<br/>
+        Role Type:Policy<br/>
+        Salary:£35,895 - £46,424<br/>
+        Location:London <br/>
+        Closing Date:25 Oct 2017 23:55 BST<br/>
+      </div>
+    </content>
+  </entry>
+  <entry xml:base="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/so/pm/1/pl/3/opp/13788-13788-Implementation-Advisor/en-GB">
+    <id>https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/so/pm/1/pl/3/opp/13788-13788-Implementation-Advisor/en-GB</id>
+    <link rel="alternate" href="https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/so/pm/1/pl/3/opp/13788-13788-Implementation-Advisor/en-GB" type="text/html"/>
+    <title>13788 - Invalid Record, Prison Officer role, but it has a prison dont know - HMP Alcatraz</title>
+    <updated>2017-10-10T23:00:00Z</updated>
+    <published>2017-10-10T23:00:00Z</published>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:13788 - Invalid Record, Prison Officer role, but it has a prison dont know - HMP Alcatraz<br/>
+        Vacancy Id:13788<br/>
+        Role Type:Policy<br/>
+        Salary:£35,895 - £46,424<br/>
+        Location:London <br/>
+        Closing Date:25 Oct 2017 23:55 BST<br/>
+      </div>
+    </content>
+  </entry>
+</feed>
