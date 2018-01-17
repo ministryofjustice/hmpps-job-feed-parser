@@ -14,17 +14,21 @@ module WcnScraper
 
     def self.find_in_string(string)
       matches = PRISONS.select { |p| string.include? p[:name] }
+      if matches.empty?
+        matches = PRISONS.select { |p| string.include? p[:alias]}
+      end
       raise self::NoPrisonsFoundError if matches.empty?
       matches.map { |p| Prison.new(p) }
     end
 
-    attr_reader :name, :lat, :lng, :town
+    attr_reader :name, :lat, :lng, :town, :alias
 
     def initialize(params)
       @name = params[:name]
       @lat = params[:lat]
       @lng = params[:lng]
       @town = params[:town]
+      @alias = params[:alias]
     end
 
     def attrs
@@ -32,7 +36,8 @@ module WcnScraper
         name: @name,
         lat: @lat,
         lng: @lng,
-        town: @town
+        town: @town,
+        alias: @alias
       }
     end
   end

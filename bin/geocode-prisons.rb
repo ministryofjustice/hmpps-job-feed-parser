@@ -45,12 +45,14 @@ prisons.map! do |prison|
   town = results['address_components'].find { |c| c['types'].include? 'postal_town' }['long_name']
   lat = results['geometry']['location']['lat']
   lng = results['geometry']['location']['lng']
+  als = 'NA'
 
   {
     name: prison,
     town: town,
     lat: lat,
-    lng: lng
+    lng: lng,
+    alias: als
   }
 end
 

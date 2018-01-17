@@ -21,7 +21,7 @@ def main
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
   good_data_to_file(collection.vacancies)
-  write_data_to_s3
+  write_data_to_s3_staging
   logger = Logger.new(STDOUT)
   logger.info("good data size: %p" % collection.vacancies.size)
   logger.info("bad data size: %p" % collection.invalid.size)
@@ -51,9 +51,26 @@ def bad_data_to_file(list)
     file.write(list.to_json)
   end
 end
-def write_data_to_s3
+def write_data_to_s3_dev
   s3 = Aws::S3::Resource.new(region:'eu-west-2')
-  obj = s3.bucket('hmpps-feed-parser').object('vacancies.json')
+  obj = s3.bucket('hmpps-feed-parser').object('dev/unidentified-prison-names.json')
+  obj.upload_file('good-data.json')
+  obj = s3.bucket('hmpps-feed-parser').object('dev/vacancies-bad-data.json')
+  obj.upload_file('bad-data.json')
+end
+
+def write_data_to_s3_staging
+  s3 = Aws::S3::Resource.new(region:'eu-west-2')
+  obj = s3.bucket('hmpps-feed-parser').object('staging/unidentified-prison-names.json')
+  obj.upload_file('good-data.json')
+  obj = s3.bucket('hmpps-feed-parser').object('staging/vacancies-bad-data.json')
+  obj.upload_file('bad-data.json')
+end
+
+
+def write_data_to_s3_prod
+  s3 = Aws::S3::Resource.new(region:'eu-west-2')
+  obj = s3.bucket('hmpps-feed-parser').object('unidentified-prison-names.json')
   obj.upload_file('good-data.json')
   obj = s3.bucket('hmpps-feed-parser').object('vacancies-bad-data.json')
   obj.upload_file('bad-data.json')

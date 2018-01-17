@@ -10,6 +10,7 @@ class VacancyFormatter
   def self.format_vacancy(vacancy)
     vacancy.prisons.map do |prison|
       {
+        id: vacancy.id + prison.name.delete(' '),
         title: vacancy.title,
         role: vacancy.role,
         salary: vacancy.salary.delete('£').delete(','),

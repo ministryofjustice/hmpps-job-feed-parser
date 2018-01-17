@@ -56,9 +56,10 @@ describe VacancyFormatter do
         ]
       end
 
-      let(:formatted_vacancies) do
+     let(:formatted_vacancies) do
         [
           {
+            id: '9908HMP/YOIDownview',
             title: '201706: Prison Officer - HMP/YOI Downview',
             role: 'prison-officer',
             salary: '31453',
@@ -68,6 +69,7 @@ describe VacancyFormatter do
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB'
           },
           {
+            id: '14225HMPLittlehey',
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
             role: 'prison-officer',
             salary: '22396',
@@ -77,6 +79,7 @@ describe VacancyFormatter do
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
           },
           {
+            id: '14225HMPStocken',
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
             role: 'prison-officer',
             salary: '22396',
@@ -86,6 +89,7 @@ describe VacancyFormatter do
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
           },
           {
+            id: '13634HMP/YOIIsleofWight',
             title: '201710: Prison Officer - HMP/YOI Isle of Wight',
             role: 'prison-officer',
             salary: '22396',
@@ -129,6 +133,7 @@ describe VacancyFormatter do
       let(:expected_format) do
         [
           {
+            id: '9908HMP/YOIDownview',
             title: '201706: Prison Officer - HMP/YOI Downview',
             role: 'prison-officer',
             salary: '31453',
@@ -170,6 +175,7 @@ describe VacancyFormatter do
       let(:expected_format) do
         [
           {
+            id: '14225HMPLittlehey',
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
             role: 'prison-officer',
             salary: '22396',
@@ -179,6 +185,7 @@ describe VacancyFormatter do
             url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
           },
           {
+            id: '14225HMPStocken',
             title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
             role: 'prison-officer',
             salary: '22396',

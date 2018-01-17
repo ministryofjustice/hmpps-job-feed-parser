@@ -4,11 +4,12 @@ describe WcnScraper::Prison do
   before do
     stub_const('PRISONS',
       [
-        { name: 'HMP Berwyn', town: 'Wrexham', lat: 53.036418, lng: -2.9292142 },
-        { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917 },
-        { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999 },
-        { name: 'HMP Coldingley', town: 'Woking', lat: 51.3217467, lng: -0.6432669 },
-        { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275 }
+        { name: 'HMP Berwyn', town: 'Wrexham', lat: 53.036418, lng: -2.9292142, alias: 'NA' },
+        { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917, alias: 'NA' },
+        { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999, alias: 'NA' },
+        { name: 'HMP Coldingley', town: 'Woking', lat: 51.3217467, lng: -0.6432669, alias: 'NA' },
+        { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275, alias: 'NA' },
+        { name: 'HMP & YOI Hollesley Bay', town: 'Woodbridge', lat: 52.051042, lng: 1.451328, alias: 'HMP Hollesley Bay' }
       ])
   end
 
@@ -18,7 +19,8 @@ describe WcnScraper::Prison do
         name: 'HMP Brixton',
         lat: 51.4516617,
         lng: -0.1250917,
-        town: 'London'
+        town: 'London',
+        alias: 'NA'
       )
     end
 
@@ -37,6 +39,10 @@ describe WcnScraper::Prison do
     it 'sets the town' do
       expect(prison.town).to eq('London')
     end
+
+    it 'sets the alias' do
+      expect(prison.alias).to eq('NA')
+    end
   end
 
   describe '#attrs' do
@@ -45,7 +51,8 @@ describe WcnScraper::Prison do
         name: 'HMP Brixton',
         lat: 51.4516617,
         lng: -0.1250917,
-        town: 'London'
+        town: 'London',
+        alias: 'NA'
       )
     end
 
@@ -54,7 +61,8 @@ describe WcnScraper::Prison do
         name: 'HMP Brixton',
         lat: 51.4516617,
         lng: -0.1250917,
-        town: 'London'
+        town: 'London',
+        alias: 'NA'
       )
     end
   end
@@ -76,7 +84,9 @@ describe WcnScraper::Prison do
           name: 'HMP Brixton',
           lat: 51.4516617,
           lng: -0.1250917,
-          town: 'London'
+          town: 'London',
+          alias: 'NA'
+
         )
       end
     end
@@ -103,7 +113,7 @@ describe WcnScraper::Prison do
       end
 
       it 'returns the correct prison' do
-        expected_prison = { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917 }
+        expected_prison = { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917, alias: 'NA' }
         expect(prisons.first.attrs).to eq(expected_prison)
       end
     end
@@ -121,10 +131,27 @@ describe WcnScraper::Prison do
 
       it 'returns the correct prisons' do
         expected_prisons = [
-          { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999 },
-          { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275 }
+          { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999, alias: 'NA'},
+          { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275, alias: 'NA' }
         ]
         expect(prisons.map(&:attrs)).to match_array(expected_prisons)
+      end
+    end
+
+    context 'given a string containing alias prisons' do
+      subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Hollesley Bay') }
+
+      it 'returns an array of Prison instances' do
+        expect(prisons).to all(be_a(described_class))
+      end
+
+      it 'returns one result' do
+        expect(prisons.count).to eq(1)
+      end
+
+      it 'returns the correct prisons' do
+        expected_prison = { name: 'HMP & YOI Hollesley Bay', town: 'Woodbridge', lat: 52.051042, lng: 1.451328, alias: 'HMP Hollesley Bay' }
+        expect(prisons.last.attrs).to eq(expected_prison)
       end
     end
 
