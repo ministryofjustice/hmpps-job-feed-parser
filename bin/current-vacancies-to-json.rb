@@ -17,7 +17,7 @@ def main
   # feed = get_rss_content
   # vacancies = filter_feed_items(feed, /prison.officer/i)
   rssfeed = WcnScraper::RssFeed.new()
-  vacancies = rssfeed.get_vacancies_data
+  vacancies = rssfeed.vacancies_data
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
   good_data_to_file(collection.vacancies)

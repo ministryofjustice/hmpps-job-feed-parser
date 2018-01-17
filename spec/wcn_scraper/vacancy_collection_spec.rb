@@ -1,39 +1,18 @@
 require_relative '../spec_helper'
+require 'webmock/rspec'
+
+ENDPOINT = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed'.freeze
+PRISONS = YAML.load_file('data/prisons.yaml')
 
 describe WcnScraper::VacancyCollection do
-  let(:valid_rss_item) do
-    dbl = double
-    allow(dbl).to receive_message_chain('id.content') { 'http://example.com/valid' }
-    allow(dbl).to receive_message_chain('title.content') { 'valid job title' }
-    allow(dbl).to receive_message_chain('content.content') { 'valid job data' }
-    dbl
-  end
-
-  let(:invalid_rss_item) do
-    dbl = double
-    allow(dbl).to receive_message_chain('id.content') { 'http://example.com/invalid' }
-    allow(dbl).to receive_message_chain('title.content') { 'invalid job title' }
-    allow(dbl).to receive_message_chain('content.content') { 'invalid job data' }
-    dbl
-  end
-
-  let(:valid_vacancy) do
-    instance_double(WcnScraper::Vacancy)
-  end
-
-  before do
-    allow(WcnScraper::Vacancy).to receive(:new).with('http://example.com/valid', 'valid job data') do
-      valid_vacancy
-    end
-
-    allow(WcnScraper::Vacancy).to receive(:new).with('http://example.com/invalid', 'invalid job data') do
-      raise WcnScraper::Prison::NoPrisonsFoundError
-    end
-  end
-
   describe '#new' do
-    subject(:collection) do
-      described_class.new([valid_rss_item, invalid_rss_item])
+    let(:collection) do
+      stub_request(:any, ENDPOINT).
+        to_return(body: File.open('./spec/fixtures/simplefeed.xml'), status: 200)
+
+      rss_feed = WcnScraper::RssFeed.new
+      vacancies = rss_feed.vacancies_data
+      described_class.new(vacancies)
     end
 
     it 'adds valid items to the `vacancies` attribute' do
@@ -41,7 +20,7 @@ describe WcnScraper::VacancyCollection do
     end
 
     it 'initializes Vacancy objects for valid items' do
-      expect(collection.vacancies).to contain_exactly(valid_vacancy)
+      expect(collection.vacancies.first.title).to include('Cookham')
     end
 
     it 'adds invalid items to the `invalid` attribute' do
@@ -49,10 +28,7 @@ describe WcnScraper::VacancyCollection do
     end
 
     it 'formats invalid vacancy data correctly' do
-      expect(collection.invalid).to contain_exactly(
-        title: 'invalid job title',
-        url: 'http://example.com/invalid'
-      )
+      expect(collection.invalid.first.to_s).to include('Alcatraz')
     end
   end
 end

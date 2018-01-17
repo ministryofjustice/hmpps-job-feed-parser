@@ -41,21 +41,11 @@ describe WcnScraper::Prison do
 
   describe '#attrs' do
     subject(:prison) do
-      described_class.new(
-        name: 'HMP Brixton',
-        lat: 51.4516617,
-        lng: -0.1250917,
-        town: 'London'
-      )
+      described_class.new(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London')
     end
 
     it 'returns all attributes of the Prison' do
-      expect(prison.attrs).to eq(
-        name: 'HMP Brixton',
-        lat: 51.4516617,
-        lng: -0.1250917,
-        town: 'London'
-      )
+      expect(prison.attrs).to eq(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London')
     end
   end
 
@@ -72,12 +62,7 @@ describe WcnScraper::Prison do
       end
 
       it 'returns the correct prison' do
-        expect(prison.attrs).to eq(
-          name: 'HMP Brixton',
-          lat: 51.4516617,
-          lng: -0.1250917,
-          town: 'London'
-        )
+        expect(prison.attrs).to eq(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London')
       end
     end
 

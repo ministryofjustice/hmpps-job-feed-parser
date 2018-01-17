@@ -11,7 +11,7 @@ describe WcnScraper::RssFeed do
       to_return(body: File.open('./spec/fixtures/feed.xml'), status: 200)
 
     rss_feed = described_class.new
-    vacancies = rss_feed.get_vacancies_data
+    vacancies = rss_feed.vacancies_data
     expect(vacancies.count).to eq(54)
   end
 end

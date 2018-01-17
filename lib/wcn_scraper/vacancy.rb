@@ -2,13 +2,7 @@ require 'date'
 
 module WcnScraper
   class Vacancy
-    attr_reader :closing_date,
-                :id,
-                :prisons,
-                :role,
-                :salary,
-                :title,
-                :url
+    attr_reader :closing_date, :id, :prisons, :role, :salary, :title, :url
 
     def initialize(url, html)
       @html = html
