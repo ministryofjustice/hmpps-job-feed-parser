@@ -53,9 +53,9 @@ def bad_data_to_file(list)
 end
 def write_data_to_s3
   s3 = Aws::S3::Resource.new(region:'eu-west-2')
-  obj = s3.bucket('hmpps-feed-parser').object('dev/vacancies.json')
+  obj = s3.bucket('hmpps-feed-parser').object('staging/vacancies.json')
   obj.upload_file('good-data.json')
-  obj = s3.bucket('hmpps-feed-parser').object('dev/vacancies-bad-data.json')
+  obj = s3.bucket('hmpps-feed-parser').object('staging/vacancies-bad-data.json')
   obj.upload_file('bad-data.json')
 end
 main
