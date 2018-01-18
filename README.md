@@ -115,3 +115,7 @@ docker run hmpps-job-feed-parser
 ```
 
 The container will execute the ruby script `bin/current-vacancies-to-json.rb` and then quit.
+
+Prison data which did not match with any prison is added to vacancies-bad-data.json file in s3. The data in json file is surfaced to business users using unidentified-prison-names.html file.
+
+This file needs to be manually copied to S3 bucket "hmpps-feed-parser".
