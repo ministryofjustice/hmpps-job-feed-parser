@@ -86,9 +86,9 @@ If required, vacancies can be re-grouped by matching them against the URL. This 
 
 ### JSON file in S3
 
-This structured vacancy data will be output to a JSON file in an S3 bucket. This functionality has yet to be developed.
+This structured vacancy data is output to a JSON file in an S3 bucket.
 
-This JSON file will contain an array of objects following the aforementioned output schema.
+This JSON file contains an array of objects following the aforementioned output schema.
 
 ## Docker
 
