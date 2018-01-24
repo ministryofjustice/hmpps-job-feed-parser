@@ -61,13 +61,16 @@ HMP Ashfield
 HMP Berwyn
 HMP Birmingham
 HMP Blantyre House
+HMP Bristol
 HMP Brixton
 HMP Buckley Hall
 HMP Bure
 HMP Channings Wood
+HMP Chelmsford
 HMP Coldingley
 HMP Dartmoor
 HMP Dovegate
+HMP Durham
 HMP Erlestoke
 HMP Featherstone
 HMP Ford
@@ -79,13 +82,18 @@ HMP Grendon/Springhill
 HMP Guys Marsh
 HMP Haverigg
 HMP Hewell
+HMP High Down
 HMP Highpoint
+HMP Holme House
 HMP Humber
 HMP Huntercombe
+HMP Isle of Wight
 HMP Kirkham
+HMP Kirklevington Grange
 HMP Lancaster Farms
 HMP Leeds
 HMP Leicester
+HMP Lewes
 HMP Leyhill
 HMP Lindholme
 HMP Littlehey
@@ -101,15 +109,67 @@ HMP Ranby
 HMP Risley
 HMP Rye Hill
 HMP Stafford
+HMP Stanford Hill
 HMP Stocken
+HMP Sudbury
 HMP Swaleside
+HMP Thameside
 HMP The Mount
 HMP Usk
+HMP Usk & HMP/YOI Prescoed
 HMP Wakefield
+HMP Wandsworth
 HMP Wayland
 HMP Wealstun
 HMP Whatton
 HMP Whitemoor
+HMP Winchester
+HMP/YOI Altcourse
+HMP/YOI Askham Grange
+HMP/YOI Bedford
+HMP/YOI Belmarsh
+HMP/YOI Brinsford
+HMP/YOI Bronzefield (F)
+HMP/YOI Bullingdon
+HMP/YOI Cardiff
+HMP/YOI Doncaster
+HMP/YOI Downview &
+HMP/YOI Drake Hall
+HMP/YOI East Sutton Park
+HMP/YOI Eastwood Park
+HMP/YOI Elmley
+HMP/YOI Exeter
+HMP/YOI Forest Bank
+HMP/YOI Foston Hall
+HMP/YOI Glen Parva
+HMP/YOI Hatfield
+HMP/YOI Hindley
+HMP/YOI Hollesley Bay
+HMP/YOI Hull
+HMP/YOI Isis
+HMP/YOI Lincoln
+HMP/YOI Low Newton
+HMP/YOI Manchester
+HMP/YOI Moorland
+HMP/YOI New Hall &
+HMP/YOI Norwich
+HMP/YOI Nottingham
+HMP/YOI Parc (YP)
+HMP/YOI Pentonville
+HMP/YOI Peterborough (F)
+HMP/YOI Portland
+HMP/YOI Preston
+HMP/YOI Rochester
+HMP/YOI Send
+HMP/YOI Stoke Heath
+HMP/YOI Styal
+HMP/YOI Swansea
+HMP/YOI Swinfen Hall
+HMP/YOI Thorn Cross
+HMP/YOI Warren Hill
+HMP/YOI Woodhill
+HMP/YOI Wormwood
+HMP/YOI Wymott
 HMYOI Aylesbury
 HMYOI Cookham Wood
 HMYOI Deerbolt
