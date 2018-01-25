@@ -137,7 +137,6 @@ HMP/YOI Downview &
 HMP/YOI Drake Hall
 HMP/YOI East Sutton Park
 HMP/YOI Eastwood Park
-HMP/YOI Elmley
 HMP/YOI Exeter
 HMP/YOI Forest Bank
 HMP/YOI Foston Hall
@@ -181,3 +180,4 @@ IRC The Verne
 Medway STC
 Oakhill STC
 Rainsbrook STC
+HMP/YOI Elmley
