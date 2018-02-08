@@ -210,6 +210,10 @@
   :town: Woking
   :lat: 51.2738987
   :lng: -0.4904337
+- :name: HMP Springhill
+  :town: Aylesbury
+  :lat: 51.8931365
+  :lng: -1.0072932
 - :name: HMP Standford Hill
   :town: Sheerness
   :lat: 51.3951083
@@ -302,10 +306,6 @@
   :town: Newton Abbot
   :lat: 50.5104924
   :lng: -3.6518204
-- :name: HMP Chelmsford
-  :town: Chelmsford
-  :lat: 51.7361324
-  :lng: 0.4860732999999999
 - :name: HMP Coldingley
   :town: Woking
   :lat: 51.3217467
@@ -318,10 +318,6 @@
   :town: Uttoxeter
   :lat: 52.8707594
   :lng: -1.7822721
-- :name: HMP Durham
-  :town: Durham
-  :lat: 54.7729047
-  :lng: -1.5679581
 - :name: HMP Erlestoke
   :town: Devizes
   :lat: 51.2833485
@@ -354,6 +350,10 @@
   :town: Aylesbury
   :lat: 51.8931365
   :lng: -1.0072932
+- :name: HMP Grendon
+  :town: Aylesbury
+  :lat: 51.8931365
+  :lng: -1.0072932
 - :name: HMP Guys Marsh
   :town: Shaftesbury
   :lat: 50.9847775
@@ -374,10 +374,6 @@
   :town: Newmarket
   :lat: 52.136974
   :lng: 0.510659
-- :name: HMP Holme House
-  :town: Stockton-on-Tees
-  :lat: 54.5766041
-  :lng: -1.2930591
 - :name: HMP Humber
   :town: Everthorpe
   :lat: 53.7693399
@@ -394,10 +390,6 @@
   :town: Preston
   :lat: 53.774924
   :lng: -2.8731828
-- :name: HMP Kirklevington Grange
-  :town: Yarm
-  :lat: 54.49503720000001
-  :lng: -1.3396233
 - :name: HMP Lancaster Farms
   :town: Lancaster
   :lat: 54.05352240000001
@@ -410,10 +402,6 @@
   :town: Leicester
   :lat: 52.6274509
   :lng: -1.131901
-- :name: HMP Lewes
-  :town: Lewes
-  :lat: 50.8726716
-  :lng: -0.0059188
 - :name: HMP Leyhill
   :town: Gloucester
   :lat: 51.62803419999999
@@ -474,26 +462,14 @@
   :town: Stafford
   :lat: 52.8114139
   :lng: -2.117706
-- :name: HMP Stanford Hill
-  :town: Sheerness
-  :lat: 51.3951083
-  :lng: 0.8510106
 - :name: HMP Stocken
   :town: Oakham
   :lat: 52.7469327
   :lng: -0.5821626999999999
-- :name: HMP Sudbury
-  :town: Ashbourne
-  :lat: 52.8927231
-  :lng: -1.7665243
 - :name: HMP Swaleside
   :town: Isle of Sheppey
   :lat: 51.3929227
   :lng: 0.8536864000000001
-- :name: HMP Thameside
-  :town: London
-  :lat: 51.4937188
-  :lng: 0.0881097
 - :name: HMP The Mount
   :town: Bovingdon
   :lat: 51.72473859999999
@@ -510,10 +486,6 @@
   :town: Wakefield
   :lat: 53.6820424
   :lng: -1.5065964
-- :name: HMP Wandsworth
-  :town: London
-  :lat: 51.4500051
-  :lng: -0.1775711
 - :name: HMP Wayland
   :town: Thetford
   :lat: 52.5538889
@@ -530,10 +502,6 @@
   :town: Whitemoor,
   :lat: 52.57534589999999
   :lng: 0.0811047
-- :name: HMP Winchester
-  :town: Winchester
-  :lat: 51.0625986
-  :lng: -1.3279811
 - :name: HMP/YOI Altcourse
   :town: Liverpool
   :lat: 53.4609347
