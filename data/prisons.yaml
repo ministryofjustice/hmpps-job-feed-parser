@@ -10,11 +10,23 @@
   :town: Rochester
   :lat: 51.3613387
   :lng: 0.4941801
+- :name: Medway Secure Training Centre
+  :town: Rochester
+  :lat: 51.3613387
+  :lng: 0.4941801
 - :name: Oakhill STC
   :town: Milton Keynes
   :lat: 52.0158572
   :lng: -0.8112400999999999
+- :name: Oakhill Secure Training Centre
+  :town: Milton Keynes
+  :lat: 52.0158572
+  :lng: -0.8112400999999999
 - :name: Rainsbrook STC
+  :town: Willoughby
+  :lat: 52.3260083
+  :lng: -1.2506373
+- :name: Rainsbrook Secure Training Centre
   :town: Willoughby
   :lat: 52.3260083
   :lng: -1.2506373
@@ -610,6 +622,18 @@
   :town: London
   :lat: 51.4978104
   :lng: 0.09673419999999999
+- :name: HMP/YOI Isle of Wight
+  :town: Newport
+  :lat: 50.713196
+  :lng: -1.3076464
+- :name: HMP/YOI Kirklevington Grange
+  :town: Yarm
+  :lat: 54.49503720000001
+  :lng: -1.3396233
+- :name: HMP/YOI Lewes
+  :town: Lewes
+  :lat: 50.8726716
+  :lng: -0.0059188
 - :name: HMP/YOI Lincoln
   :town: Lincoln
   :lat: 53.2348132
@@ -674,6 +698,10 @@
   :town: Wilmslow
   :lat: 53.3406335
   :lng: -2.23928
+- :name: HMP/YOI Sudbury
+  :town: Ashbourne
+  :lat: 52.8927231
+  :lng: -1.7665243
 - :name: HMP/YOI Swansea
   :town: Swansea
   :lat: 51.61499999999999
@@ -818,6 +846,18 @@
   :town: London
   :lat: 51.4978104
   :lng: 0.09673419999999999
+- :name: HMP & YOI Isle of Wight
+  :town: Newport
+  :lat: 50.713196
+  :lng: -1.3076464
+- :name: HMP & YOI Kirklevington Grange
+  :town: Yarm
+  :lat: 54.49503720000001
+  :lng: -1.3396233
+- :name: HMP & YOI Lewes
+  :town: Lewes
+  :lat: 50.8726716
+  :lng: -0.0059188
 - :name: HMP & YOI Lincoln
   :town: Lincoln
   :lat: 53.2348132
@@ -882,6 +922,10 @@
   :town: Wilmslow
   :lat: 53.3406335
   :lng: -2.23928
+- :name: HMP & YOI Sudbury
+  :town: Ashbourne
+  :lat: 52.8927231
+  :lng: -1.7665243
 - :name: HMP & YOI Swansea
   :town: Swansea
   :lat: 51.61499999999999
@@ -1090,6 +1134,10 @@
   :town: Wilmslow
   :lat: 53.3406335
   :lng: -2.23928
+- :name: HMYOI Sudbury
+  :town: Ashbourne
+  :lat: 52.8927231
+  :lng: -1.7665243
 - :name: HMYOI Swansea
   :town: Swansea
   :lat: 51.61499999999999
