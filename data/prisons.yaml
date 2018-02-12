@@ -204,8 +204,8 @@
   :lng: -2.6886838
 - :name: HMP Rochester
   :town: Rochester
-  :lat: 51.36826
-  :lng: 0.4917642
+  :lat: 51.37
+  :lng: 0.488611
 - :name: HMP Send
   :town: Woking
   :lat: 51.2738987
@@ -652,8 +652,8 @@
   :lng: -2.6886838
 - :name: HMP/YOI Rochester
   :town: Rochester
-  :lat: 51.3647454
-  :lng: 0.4945179
+  :lat: 51.37
+  :lng: 0.488611
 - :name: HMP/YOI Send
   :town: Woking
   :lat: 51.2738987
@@ -876,8 +876,8 @@
   :lng: -2.6886838
 - :name: HMP & YOI Rochester
   :town: Rochester
-  :lat: 51.3647454
-  :lng: 0.4945179
+  :lat: 51.37
+  :lng: 0.488611
 - :name: HMP & YOI Send
   :town: Woking
   :lat: 51.2738987
@@ -1088,8 +1088,8 @@
   :lng: -2.6886838
 - :name: HMYOI Rochester
   :town: Rochester
-  :lat: 51.3647454
-  :lng: 0.4945179
+  :lat: 51.37
+  :lng: 0.488611
 - :name: HMYOI Send
   :town: Woking
   :lat: 51.2738987
