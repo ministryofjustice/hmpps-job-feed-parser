@@ -4,10 +4,10 @@ describe VacancyFormatter do
   before do
     stub_const('PRISONS',
       [
-        { name: 'HMP/YOI Downview', town: 'Sutton', lat: 51.338463, lng: -0.188044 },
-        { name: 'HMP/YOI Isle of Wight', town: 'Newport', lat: 50.713196, lng: -1.3076464 },
-        { name: 'HMP Littlehey', town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
-        { name: 'HMP Stocken', town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 }
+        { name: 'HMP/YOI Cefereso No. 9', town: 'Sutton', lat: 51.338463, lng: -0.188044, type: 'Youth Custody' },
+        { name: 'HMP/YOI Palacio de Lecumberri', town: 'Newport', lat: 50.713196, lng: -1.3076464, type: 'Youth Custody' },
+        { name: 'HMP Penal del Altiplano', town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374, type: 'Prison' },
+        { name: 'HMP Islas Marías Federal Prison', town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999, type: 'Prison' }
       ])
   end
 
@@ -18,9 +18,9 @@ describe VacancyFormatter do
       let(:vacancies) do
         [
           WcnScraper::Vacancy.new(
-            'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB',
+            'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Cefereso No. 9/en-GB',
             <<~HTML
-              <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201706: Prison Officer - HMP/YOI Downview<br/>
+              <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201706: Prison Officer - HMP/YOI Cefereso No. 9<br/>
               Vacancy Id:9908<br/>
               Role Type:Operational Delivery,prison officer<br/>
               Salary:£31,453<br/>
@@ -30,9 +30,9 @@ describe VacancyFormatter do
             HTML
           ),
           WcnScraper::Vacancy.new(
-            'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB',
+            'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Penal del Altiplano-HMP-Islas Marías Federal Prison/en-GB',
             <<~HTML
-              <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Stocken<br/>
+              <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison<br/>
               Vacancy Id:14225<br/>
               Role Type:Operational Delivery,prison officer<br/>
               Salary:£22,396<br/>
@@ -44,11 +44,11 @@ describe VacancyFormatter do
           WcnScraper::Vacancy.new(
             'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13634-201710-Prison-Officer-HMP-YOI-Isle-of-Wight/en-GB',
             <<~HTML
-              <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201710: Prison Officer - HMP/YOI Isle of Wight<br/>
+              <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201710: Prison Officer - HMP/YOI Palacio de Lecumberri<br/>
               Vacancy Id:13634<br/>
               Role Type:Operational Delivery,prison officer<br/>
               Salary:£22,396<br/>
-              Location:Newport (Isle of Wight) <br/>
+              Location:Newport (Palacio de Lecumberri) <br/>
               Closing Date:30 Nov 2017 23:55 GMT<br/>
               </div>
             HTML
@@ -59,40 +59,44 @@ describe VacancyFormatter do
       let(:formatted_vacancies) do
         [
           {
-            title: '201706: Prison Officer - HMP/YOI Downview',
+            title: '201706: Prison Officer - HMP/YOI Cefereso No. 9',
             role: 'prison-officer',
             salary: '31453',
             closing_date: '07/07/2017',
-            prison_name: 'HMP/YOI Downview',
+            prison_name: 'HMP/YOI Cefereso No. 9',
             prison_location: { town: 'Sutton', lat: 51.338463, lng: -0.188044 },
-            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB'
+            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Cefereso No. 9/en-GB',
+            type: 'Youth Custody'
           },
           {
-            title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
             role: 'prison-officer',
             salary: '22396',
             closing_date: '30/11/2017',
-            prison_name: 'HMP Littlehey',
+            prison_name: 'HMP Penal del Altiplano',
             prison_location: { town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
-            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
+            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Penal del Altiplano-HMP-Islas Marías Federal Prison/en-GB',
+            type: 'Prison'
           },
           {
-            title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
             role: 'prison-officer',
             salary: '22396',
             closing_date: '30/11/2017',
-            prison_name: 'HMP Stocken',
+            prison_name: 'HMP Islas Marías Federal Prison',
             prison_location: { town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 },
-            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
+            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Penal del Altiplano-HMP-Islas Marías Federal Prison/en-GB',
+            type: 'Prison'
           },
           {
-            title: '201710: Prison Officer - HMP/YOI Isle of Wight',
+            title: '201710: Prison Officer - HMP/YOI Palacio de Lecumberri',
             role: 'prison-officer',
             salary: '22396',
             closing_date: '30/11/2017',
-            prison_name: 'HMP/YOI Isle of Wight',
+            prison_name: 'HMP/YOI Palacio de Lecumberri',
             prison_location: { town: 'Newport', lat: 50.713196, lng: -1.3076464 },
-            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13634-201710-Prison-Officer-HMP-YOI-Isle-of-Wight/en-GB'
+            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/13634-201710-Prison-Officer-HMP-YOI-Isle-of-Wight/en-GB',
+            type: 'Youth Custody'
           }
         ]
       end
@@ -113,9 +117,9 @@ describe VacancyFormatter do
 
       let(:vacancy) do
         WcnScraper::Vacancy.new(
-          'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB',
+          'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Cefereso No. 9/en-GB',
           <<~HTML
-            <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201706: Prison Officer - HMP/YOI Downview<br/>
+            <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201706: Prison Officer - HMP/YOI Cefereso No. 9<br/>
             Vacancy Id:9908<br/>
             Role Type:Operational Delivery,Prison Officer<br/>
             Salary:£31,453<br/>
@@ -129,13 +133,14 @@ describe VacancyFormatter do
       let(:expected_format) do
         [
           {
-            title: '201706: Prison Officer - HMP/YOI Downview',
+            title: '201706: Prison Officer - HMP/YOI Cefereso No. 9',
             role: 'prison-officer',
             salary: '31453',
             closing_date: '07/07/2017',
-            prison_name: 'HMP/YOI Downview',
+            prison_name: 'HMP/YOI Cefereso No. 9',
             prison_location: { town: 'Sutton', lat: 51.338463, lng: -0.188044 },
-            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Downview/en-GB'
+            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9908-201706-Prison-Officer-HMP-YOI-Cefereso No. 9/en-GB',
+            type: 'Youth Custody'
           }
         ]
       end
@@ -154,9 +159,9 @@ describe VacancyFormatter do
 
       let(:vacancy) do
         WcnScraper::Vacancy.new(
-          'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB',
+          'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Penal del Altiplano-HMP-Islas Marías Federal Prison/en-GB',
           <<~HTML
-            <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Stocken<br/>
+            <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison<br/>
             Vacancy Id:14225<br/>
             Role Type:Operational Delivery,Prison Officer<br/>
             Salary:£22,396<br/>
@@ -170,22 +175,24 @@ describe VacancyFormatter do
       let(:expected_format) do
         [
           {
-            title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
             role: 'prison-officer',
             salary: '22396',
             closing_date: '30/11/2017',
-            prison_name: 'HMP Littlehey',
+            prison_name: 'HMP Penal del Altiplano',
             prison_location: { town: 'Huntingdon', lat: 52.2805913, lng: -0.3122374 },
-            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
+            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Penal del Altiplano-HMP-Islas Marías Federal Prison/en-GB',
+            type: 'Prison'
           },
           {
-            title: '201711: Prison Officer - HMP Littlehey & HMP Stocken',
+            title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
             role: 'prison-officer',
             salary: '22396',
             closing_date: '30/11/2017',
-            prison_name: 'HMP Stocken',
+            prison_name: 'HMP Islas Marías Federal Prison',
             prison_location: { town: 'Oakham', lat: 52.7469327, lng: -0.5821626999999999 },
-            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB'
+            url: 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Penal del Altiplano-HMP-Islas Marías Federal Prison/en-GB',
+            type: 'Prison'
           }
         ]
       end
