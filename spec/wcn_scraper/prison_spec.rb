@@ -4,11 +4,11 @@ describe WcnScraper::Prison do
   before do
     stub_const('PRISONS',
       [
-        { name: 'HMP Berwyn', town: 'Wrexham', lat: 53.036418, lng: -2.9292142 },
-        { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917 },
-        { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999 },
-        { name: 'HMP Coldingley', town: 'Woking', lat: 51.3217467, lng: -0.6432669 },
-        { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275 }
+        { name: 'HMP Berwyn', town: 'Wrexham', lat: 53.036418, lng: -2.9292142, type: 'Youth Custody' },
+        { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917, type: 'Youth Custody' },
+        { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999, type: 'Youth Custody' },
+        { name: 'HMP Coldingley', town: 'Woking', lat: 51.3217467, lng: -0.6432669, type: 'Youth Custody' },
+        { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
       ])
   end
 
@@ -41,11 +41,11 @@ describe WcnScraper::Prison do
 
   describe '#attrs' do
     subject(:prison) do
-      described_class.new(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London')
+      described_class.new(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London', type: 'Youth Custody')
     end
 
     it 'returns all attributes of the Prison' do
-      expect(prison.attrs).to eq(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London')
+      expect(prison.attrs).to eq(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London', type: 'Youth Custody')
     end
   end
 
@@ -62,7 +62,7 @@ describe WcnScraper::Prison do
       end
 
       it 'returns the correct prison' do
-        expect(prison.attrs).to eq(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London')
+        expect(prison.attrs).to eq(name: 'HMP Brixton', lat: 51.4516617, lng: -0.1250917, town: 'London', type: 'Youth Custody')
       end
     end
 
@@ -88,7 +88,7 @@ describe WcnScraper::Prison do
       end
 
       it 'returns the correct prison' do
-        expected_prison = { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917 }
+        expected_prison = { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917, type: 'Youth Custody' }
         expect(prisons.first.attrs).to eq(expected_prison)
       end
     end
@@ -106,8 +106,8 @@ describe WcnScraper::Prison do
 
       it 'returns the correct prisons' do
         expected_prisons = [
-          { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999 },
-          { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275 }
+          { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999, type: 'Youth Custody' },
+          { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
         ]
         expect(prisons.map(&:attrs)).to match_array(expected_prisons)
       end

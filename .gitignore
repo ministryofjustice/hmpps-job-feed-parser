@@ -52,6 +52,7 @@ build-iPhoneSimulator/
 .idea/
 bad-data.json
 good-data.json
+good-youth-custody-data.json
 
 set_env.sh
 

@@ -16,7 +16,8 @@ class VacancyFormatter
         prison_name: prison.name,
         prison_location: { town: prison.town,
                            lat: prison.lat, lng: prison.lng },
-        url: vacancy.url
+        url: vacancy.url,
+        type: prison.type
       }
     end
   end
