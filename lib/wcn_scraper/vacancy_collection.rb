@@ -8,8 +8,9 @@ module WcnScraper
 
       rss_items.each do |i|
         begin
-          vacancy = add_vacancy(WcnScraper::Vacancy.new(i.id.content, i.content.content))
+          vacancy = WcnScraper::Vacancy.new(i.id.content, i.content.content)
           add_invalid(i) unless vacancy.good_title
+          add_vacancy(vacancy)
         rescue WcnScraper::Prison::NoPrisonsFoundError
           add_invalid(i)
         end
