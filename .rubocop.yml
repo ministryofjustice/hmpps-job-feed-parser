@@ -68,7 +68,7 @@ Style/TrivialAccessors:
   AllowPredicates: true
 
 Metrics/LineLength:
-  Max: 80
+  Max: 100
   Exclude:
     - 'spec/**/*'
 

@@ -37,6 +37,7 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }
       specify { expect(vacancy.closing_date).to be_a(Date) }
       specify { expect(vacancy.closing_date).to eq(Date.new(2017, 7, 7)) }
+      specify { expect(vacancy.good_title).to be_truthy }
     end
 
     context 'vacancy with two prisons' do

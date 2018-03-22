@@ -16,7 +16,7 @@ describe WcnScraper::VacancyCollection do
     end
 
     it 'adds valid items to the `vacancies` attribute' do
-      expect(collection.vacancies.count).to eq(1)
+      expect(collection.vacancies.count).to eq(2)
     end
 
     it 'initializes Vacancy objects for valid items' do
