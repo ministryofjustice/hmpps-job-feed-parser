@@ -68,4 +68,11 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.closing_date).to eq(Date.new(2017, 11, 30)) }
     end
   end
+  describe 'good_title' do
+    context 'Checks for spurious text in a title' do
+      it 'is false for a bad name' do
+        true
+      end
+    end
+  end
 end
