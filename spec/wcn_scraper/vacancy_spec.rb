@@ -69,10 +69,23 @@ describe WcnScraper::Vacancy do
     end
   end
   describe 'good_title' do
-    context 'Checks for spurious text in a title' do
-      it 'is false for a bad name' do
-        true
-      end
-    end
+    subject(:vacancy) { described_class.new(url, html) }
+
+    let(:html) {
+      <<~HTML
+          <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Alcatraz<br/>
+          Vacancy Id:14225<br/>
+          Role Type:Operational Delivery,prison-officer<br/>
+          Salary:£22,396<br/>
+          Location:Huntingdon ,Oakham <br/>
+          Closing Date:30 Nov 2017 23:55 GMT<br/>
+          </div>
+      HTML
+    }
+
+    let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB' }
+
+    specify { expect(vacancy.good_title).to be_falsey }
+
   end
 end
