@@ -11,7 +11,7 @@ module WcnScraper
           vacancy = WcnScraper::Vacancy.new(i.id.content, i.content.content)
           # TODO: output something of the bad data
           if vacancy.bad_data
-            add_invalid(vacancy.bad_data, i)
+            add_invalid('Unrecognised text: ' + vacancy.bad_data, i)
           end
           add_vacancy(vacancy)
         rescue WcnScraper::Prison::NoPrisonsFoundError
