@@ -24,7 +24,7 @@ describe WcnScraper::VacancyCollection do
     end
 
     it 'adds invalid items to the `invalid` attribute' do
-      expect(collection.invalid.count).to eq(1)
+      expect(collection.invalid.count).to eq(2)
     end
 
     it 'formats invalid vacancy data correctly' do

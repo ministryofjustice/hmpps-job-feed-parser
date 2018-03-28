@@ -2,7 +2,7 @@ require 'date'
 
 module WcnScraper
   class Vacancy
-    attr_reader :closing_date, :id, :prisons, :role, :salary, :title, :url, :good_title
+    attr_reader :closing_date, :id, :prisons, :role, :salary, :title, :url, :bad_data
 
     def initialize(url, html)
       @html = html
@@ -13,7 +13,7 @@ module WcnScraper
       @salary = the_salary
       @title = the_title
       @url = url
-      @good_title = good_title?
+      @bad_data = bad_data?
     end
 
     private
@@ -44,9 +44,23 @@ module WcnScraper
       regexp.match(@html)[1].strip
     end
 
-    def good_title?
+    def bad_data?
       # Prove that only valid prisons and standard text is included in the title
-      true
+      # Remove boilerplate text
+      boilerplate = 'Prison Officer - '
+      purported_prisons = the_title.partition(boilerplate).last
+      known_prisons = PRISONS.select { |p| purported_prisons.include? p[:name] }
+      # Take out the prisons that we know of
+      known_prisons.each do |site|
+        prison_name = site[:name]
+        purported_prisons[prison_name] = ''
+      end
+      # Remove known cruft or return unknown texts
+      if purported_prisons.tr!(' ,-/&+()', '') == '' || purported_prisons == ''
+        false
+      else
+        purported_prisons
+      end
     end
   end
 end

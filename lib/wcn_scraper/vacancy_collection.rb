@@ -9,18 +9,22 @@ module WcnScraper
       rss_items.each do |i|
         begin
           vacancy = WcnScraper::Vacancy.new(i.id.content, i.content.content)
-          add_invalid(i) unless vacancy.good_title
+          # TODO: output something of the bad data
+          if vacancy.bad_data
+            add_invalid(vacancy.bad_data, i)
+          end
           add_vacancy(vacancy)
         rescue WcnScraper::Prison::NoPrisonsFoundError
-          add_invalid(i)
+          add_invalid('No Prison recognised', i)
         end
       end
     end
 
     private
 
-    def add_invalid(rss_item)
+    def add_invalid(description, rss_item)
       @invalid << {
+        description: description,
         title: rss_item.title.content,
         url: rss_item.id.content
       }

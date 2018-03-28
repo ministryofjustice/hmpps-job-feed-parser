@@ -37,7 +37,7 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }
       specify { expect(vacancy.closing_date).to be_a(Date) }
       specify { expect(vacancy.closing_date).to eq(Date.new(2017, 7, 7)) }
-      specify { expect(vacancy.good_title).to be_truthy }
+      specify { expect(vacancy.bad_data).to be_falsey }
     end
 
     context 'vacancy with two prisons' do
@@ -68,24 +68,23 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.closing_date).to eq(Date.new(2017, 11, 30)) }
     end
   end
-  describe 'good_title' do
+  describe 'bad_data' do
     subject(:vacancy) { described_class.new(url, html) }
 
     let(:html) {
       <<~HTML
-          <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Alcatraz<br/>
-          Vacancy Id:14225<br/>
-          Role Type:Operational Delivery,prison-officer<br/>
-          Salary:£22,396<br/>
-          Location:Huntingdon ,Oakham <br/>
-          Closing Date:30 Nov 2017 23:55 GMT<br/>
-          </div>
+        <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Littlehey & HMP Alcatraz<br/>
+        Vacancy Id:14225<br/>
+        Role Type:Operational Delivery,prison-officer<br/>
+        Salary:£22,396<br/>
+        Location:Huntingdon ,Oakham <br/>
+        Closing Date:30 Nov 2017 23:55 GMT<br/>
+        </div>
       HTML
     }
 
     let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB' }
 
-    specify { expect(vacancy.good_title).to be_falsey }
-
+    specify { expect(vacancy.bad_data).to be_truthy }
   end
 end
