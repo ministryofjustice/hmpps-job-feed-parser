@@ -1398,6 +1398,46 @@
   :lat: 51.3884000
   :lng: 0.8499000
   :type: Prison
+- :name: HMP Feltham
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
+- :name: HMP/YOI Feltham
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
+- :name: HMP & YOI Feltham
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
+- :name: HMYOI Feltham
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
+- :name: HMP Feltham B
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
+- :name: HMP/YOI Feltham B
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
+- :name: HMP & YOI Feltham B
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
+- :name: HMYOI Feltham B
+  :town: Feltham
+  :lat: 51.4415566
+  :lng: -0.4340565
+  :type: Prison
 - :name: HMP Cookham Wood
   :town: Rochester
   :lat: 51.3647454
@@ -1457,26 +1497,6 @@
   :town: Wetherby
   :lat: 53.9356199
   :lng: -1.3693436
-  :type: Youth Custody
-- :name: HMP Feltham
-  :town: Feltham
-  :lat: 51.4415566
-  :lng: -0.4340565
-  :type: Youth Custody
-- :name: HMP/YOI Feltham
-  :town: Feltham
-  :lat: 51.4415566
-  :lng: -0.4340565
-  :type: Youth Custody
-- :name: HMP & YOI Feltham
-  :town: Feltham
-  :lat: 51.4415566
-  :lng: -0.4340565
-  :type: Youth Custody
-- :name: HMYOI Feltham
-  :town: Feltham
-  :lat: 51.4415566
-  :lng: -0.4340565
   :type: Youth Custody
 - :name: HMP Feltham A
   :town: Feltham
