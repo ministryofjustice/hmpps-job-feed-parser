@@ -43,9 +43,8 @@ def filter_feed_items(rss_feed, regexp)
 end
 def good_data_to_file(list, file_name, filter)
   formatted_vacancies = VacancyFormatter.output(list)
-  filtered_vacancies = formatted_vacancies.select {|v| v[:type] == filter}
   File.open(file_name, 'w') do |file|
-    file.write(filtered_vacancies.to_json)
+    file.write(filtered_vacancies(formatted_vacancies, filter).to_json)
   end
 end
 def bad_data_to_file(list)
@@ -61,5 +60,12 @@ def write_data_to_s3
   obj.upload_file('good-youth-custody-data.json')
   obj = s3.bucket('hmpps-feed-parser').object('vacancies-bad-data.json')
   obj.upload_file('bad-data.json')
+end
+def filtered_vacancies(formatted_vacancies, filter)
+  if filter == 'Youth Custody'
+    formatted_vacancies.select {|v| v[:type] == filter}
+  else
+    formatted_vacancies
+  end
 end
 main
