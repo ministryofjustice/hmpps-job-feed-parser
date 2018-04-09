@@ -20,7 +20,8 @@ def main
   vacancies = rssfeed.vacancies_data
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
-  good_data_to_file(collection.vacancies)
+  good_data_to_file(collection.vacancies, 'good-data.json', 'Prison')
+  good_data_to_file(collection.vacancies, 'good-youth-custody-data.json', 'Youth Custody')
   write_data_to_s3
   logger = Logger.new(STDOUT)
   logger.info("good data size: %p" % collection.vacancies.size)
@@ -40,10 +41,10 @@ def filter_feed_items(rss_feed, regexp)
     !regexp.match(item.title.content).nil?
   end
 end
-def good_data_to_file(list)
+def good_data_to_file(list, file_name, filter)
   formatted_vacancies = VacancyFormatter.output(list)
-  File.open('good-data.json', 'w') do |file|
-    file.write(formatted_vacancies.to_json)
+  File.open(file_name, 'w') do |file|
+    file.write(filtered_vacancies(formatted_vacancies, filter).to_json)
   end
 end
 def bad_data_to_file(list)
@@ -55,7 +56,16 @@ def write_data_to_s3
   s3 = Aws::S3::Resource.new(region:'eu-west-2')
   obj = s3.bucket('hmpps-feed-parser').object('vacancies.json')
   obj.upload_file('good-data.json')
+  obj = s3.bucket('hmpps-feed-parser').object('youth-custody-vacancies.json')
+  obj.upload_file('good-youth-custody-data.json')
   obj = s3.bucket('hmpps-feed-parser').object('vacancies-bad-data.json')
   obj.upload_file('bad-data.json')
+end
+def filtered_vacancies(formatted_vacancies, filter)
+  if filter == 'Youth Custody'
+    formatted_vacancies.select {|v| v[:type] == filter}
+  else
+    formatted_vacancies
+  end
 end
 main

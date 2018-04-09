@@ -18,13 +18,14 @@ module WcnScraper
       matches.map { |p| Prison.new(p) }
     end
 
-    attr_reader :name, :lat, :lng, :town
+    attr_reader :name, :lat, :lng, :town, :type
 
     def initialize(params)
       @name = params[:name]
       @lat = params[:lat]
       @lng = params[:lng]
       @town = params[:town]
+      @type = params[:type]
     end
 
     def attrs
@@ -32,7 +33,8 @@ module WcnScraper
         name: @name,
         lat: @lat,
         lng: @lng,
-        town: @town
+        town: @town,
+        type: @type
       }
     end
   end
