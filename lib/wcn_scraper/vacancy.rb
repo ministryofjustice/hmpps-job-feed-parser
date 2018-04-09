@@ -56,7 +56,7 @@ module WcnScraper
         purported_prisons[prison_name] = ''
       end
       # Remove known cruft or return unknown texts
-      if purported_prisons.tr(' ,-/&+()', '') == '' || purported_prisons == ''
+      if purported_prisons.tr('and ,-/&+()', '') == '' || purported_prisons == ''
         false
       else
         purported_prisons
