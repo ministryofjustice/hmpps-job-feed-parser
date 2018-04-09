@@ -1498,6 +1498,16 @@
   :lat: 53.9356199
   :lng: -1.3693436
   :type: Youth Custody
+- :name: HMYOI Elmley
+  :town: Eastchurch
+  :lat: 51.3884000
+  :lng: 0.8499000
+  :type: Prison
+- :name: IRC Verne
+  :town: Moffat
+  :lat: 50.5615548
+  :lng: -2.4357944
+  :type: Youth Custody
 - :name: HMP Feltham A
   :town: Feltham
   :lat: 51.4415566
@@ -1537,9 +1547,10 @@
   :town: Rochester
   :lat: 51.3613387
   :lng: 0.4941801
-  :type: Prison
+  :type: Youth Custody
 - :name: Secure Training Centre Medway
   :town: Rochester
   :lat: 51.3613387
   :lng: 0.4941801
-  :type: Prison
+  :type: Youth Custody
+  
