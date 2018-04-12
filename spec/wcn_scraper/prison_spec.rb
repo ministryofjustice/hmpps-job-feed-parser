@@ -199,6 +199,32 @@ describe WcnScraper::Prison do
         expect(prisons.map(&:attrs)).to match_array(expected_prisons)
       end
     end
+    context 'given a string containing two prisons, the substring site should only return once' do
+      subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Bourne & HMP Bournemouth') }
 
+      it 'returns an array of Prison instances' do
+        expect(prisons).to all(be_a(described_class))
+      end
+
+      it 'returns two results' do
+        stub_const('PRISONS',
+                   [
+                     { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+                   ])
+        expect(prisons.count).to eq(1)
+      end
+
+      it 'returns the correct prisons' do
+        stub_const('PRISONS',
+                   [
+                     { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+                   ])
+
+        expected_prisons = [
+          { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+        ]
+        expect(prisons.map(&:attrs)).to match_array(expected_prisons)
+      end
+    end
   end
 end
