@@ -6,7 +6,9 @@ describe WcnScraper::Vacancy do
       [
         { name: 'HMP/YOI Downview', lat: 51.338463, lng: -0.188044 },
         { name: 'HMP Littlehey', lat: 52.2805913, lng: -0.3122374 },
-        { name: 'HMP Stocken', lat: 52.7469327, lng: -0.5821626999999999 }
+        { name: 'HMP Stocken', lat: 52.7469327, lng: -0.5821626999999999 },
+        { name: 'HMP Bourne', lat: 52.7469327, lng: -0.5821626999999999 },
+        { name: 'HMP Bournemouth', lat: 52.7469327, lng: -0.5821626999999999 }
       ])
   end
 
@@ -86,5 +88,24 @@ describe WcnScraper::Vacancy do
     let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB' }
 
     specify { expect(vacancy.bad_data).to be_truthy }
+  end
+  describe 'substring data is handled by ordering' do
+    subject(:vacancy) { described_class.new(url, html) }
+
+    let(:html) {
+      <<~HTML
+        <div xmlns="http://www.w3.org/1999/xhtml">Vacancy Title:201711: Prison Officer - HMP Bournemouth & HMP Bourne<br/>
+        Vacancy Id:14225<br/>
+        Role Type:Operational Delivery,prison-officer<br/>
+        Salary:£22,396<br/>
+        Location:Huntingdon ,Oakham <br/>
+        Closing Date:30 Nov 2017 23:55 GMT<br/>
+        </div>
+      HTML
+    }
+
+    let(:url) { 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/14225-201711-Prison-Officer-HMP-Littlehey-HMP-Stocken/en-GB' }
+
+    specify { expect(vacancy.bad_data).to be_falsey }
   end
 end
