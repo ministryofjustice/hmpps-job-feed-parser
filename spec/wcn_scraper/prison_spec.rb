@@ -206,7 +206,7 @@ describe WcnScraper::Prison do
         expect(prisons).to all(be_a(described_class))
       end
 
-      it 'returns two results' do
+      it 'returns one result' do
         stub_const('PRISONS',
                    [
                      { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
