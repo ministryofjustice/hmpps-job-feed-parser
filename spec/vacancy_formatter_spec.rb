@@ -14,7 +14,7 @@ describe VacancyFormatter do
   describe '.output' do
     subject(:output) { described_class.output(vacancies) }
 
-    context 'given three vacancies across four prisons' do
+    context 'when given three vacancies across four prisons' do
       let(:vacancies) do
         [
           WcnScraper::Vacancy.new(
@@ -112,7 +112,7 @@ describe VacancyFormatter do
   end
 
   describe '.format_vacancy' do
-    context 'given a vacancy in one prison' do
+    context 'when given a vacancy in one prison' do
       subject(:formatted) { described_class.format_vacancy(vacancy) }
 
       let(:vacancy) do
@@ -154,7 +154,7 @@ describe VacancyFormatter do
       end
     end
 
-    context 'given a vacancy in two prisons' do
+    context 'when a vacancy has two prisons' do
       subject(:formatted) { described_class.format_vacancy(vacancy) }
 
       let(:vacancy) do

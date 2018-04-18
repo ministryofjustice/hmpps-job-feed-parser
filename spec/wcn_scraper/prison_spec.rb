@@ -8,7 +8,9 @@ describe WcnScraper::Prison do
         { name: 'HMP Brixton', town: 'London', lat: 51.4516617, lng: -0.1250917, type: 'Youth Custody' },
         { name: 'HMP Chelmsford', town: 'Chelmsford', lat: 51.7361324, lng: 0.4860732999999999, type: 'Youth Custody' },
         { name: 'HMP Coldingley', town: 'Woking', lat: 51.3217467, lng: -0.6432669, type: 'Youth Custody' },
-        { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+        { name: 'HMP Dartmoor', town: 'Yelverton', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' },
+        { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' },
+        { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' }
       ])
   end
 
@@ -50,7 +52,7 @@ describe WcnScraper::Prison do
   end
 
   describe '.find' do
-    context 'given a valid prison name' do
+    context 'when there is a valid prison name' do
       subject(:prison) { described_class.find('HMP Brixton') }
 
       it 'returns a Prison instance' do
@@ -66,7 +68,7 @@ describe WcnScraper::Prison do
       end
     end
 
-    context 'given a non-existent prison name' do
+    context 'when there is a non-existent prison name' do
       subject(:prison) { described_class.find('HMP Azkaban') }
 
       specify do
@@ -76,7 +78,7 @@ describe WcnScraper::Prison do
   end
 
   describe '.find_in_string' do
-    context 'given a string containing one prison' do
+    context 'when a string contains one prison' do
       subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Brixton') }
 
       it 'returns an array of Prison instances' do
@@ -93,7 +95,7 @@ describe WcnScraper::Prison do
       end
     end
 
-    context 'given a string containing two prisons' do
+    context 'when a string containing two prisons' do
       subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Chelmsford & HMP Dartmoor') }
 
       it 'returns an array of Prison instances' do
@@ -113,11 +115,99 @@ describe WcnScraper::Prison do
       end
     end
 
-    context 'given a string containing no prisons' do
+    context 'when a string contains no prisons' do
       subject(:prisons) { described_class.find_in_string('201706: Prison Officer - Something Badly Formatted') }
 
       specify do
         expect { prisons }.to raise_error(WcnScraper::Prison::NoPrisonsFoundError)
+      end
+    end
+    context 'when one prison name is contained inside another' do
+      subject(:prisons) { described_class.find_in_string('HMP Bourne') }
+
+      specify do
+        expect(prisons.count).to eq(1)
+      end
+    end
+    context 'when a string contains two prisons, one of which has text contained in the other' do
+      subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Bournemouth & HMP Bourne') }
+
+      it 'returns an array of Prison instances' do
+        expect(prisons).to all(be_a(described_class))
+      end
+
+      it 'returns two results' do
+        expect(prisons.count).to eq(2)
+      end
+
+      it 'when prison is a substring of another it returns the correct prisons' do
+        expected_prisons = [
+          { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' },
+          { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+        ]
+        expect(prisons.map(&:attrs)).to match_array(expected_prisons)
+      end
+    end
+    context 'when there are two prisons, one of which has text contained in the other, ordered ascending' do
+      subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Bourne & HMP Bournemouth') }
+
+      it 'returns an array of Prison instances' do
+        expect(prisons).to all(be_a(described_class))
+      end
+
+      it 'returns two results' do
+        expect(prisons.count).to eq(2)
+      end
+
+      it 'when there are two prisons, one of which is a substring of the other, it returns the correct prisons' do
+        stub_const('PRISONS', [{ name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }, { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' }])
+        expected_prisons = [
+          { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' },
+          { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+        ]
+        expect(prisons.map(&:attrs)).to match_array(expected_prisons)
+      end
+    end
+    context 'when there are two prisons, one of which has text contained in the other, ordered descending' do
+      subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Bourne & HMP Bournemouth') }
+
+      it 'returns an array of Prison instances' do
+        expect(prisons).to all(be_a(described_class))
+      end
+
+      it 'returns two results' do
+        expect(prisons.count).to eq(2)
+      end
+
+      it 'returns the correct prisons' do
+        stub_const('PRISONS', [{ name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' }, { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }])
+
+        expected_prisons = [
+          { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' },
+          { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+        ]
+        expect(prisons.map(&:attrs)).to match_array(expected_prisons)
+      end
+    end
+    context 'when there are two prisons, the substring site should only return once' do
+      subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Bourne & HMP Bournemouth') }
+
+      it 'returns an array of Prison instances' do
+        expect(prisons).to all(be_a(described_class))
+      end
+
+      it 'returns one result' do
+        stub_const('PRISONS', [{ name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }])
+        expect(prisons.count).to eq(1)
+      end
+
+      it 'returns the correct prisons' do
+        stub_const('PRISONS', [{ name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }])
+
+        expected_prisons = [
+          { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
+        ]
+        expect(prisons.map(&:attrs)).to match_array(expected_prisons)
       end
     end
   end
