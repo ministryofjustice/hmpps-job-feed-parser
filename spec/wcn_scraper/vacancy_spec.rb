@@ -13,7 +13,7 @@ describe WcnScraper::Vacancy do
   end
 
   describe '#new' do
-    context 'vacancy with one prison' do
+    context 'with a vacancy with one prison' do
       subject(:vacancy) { described_class.new(url, html) }
 
       let(:html) {
@@ -42,7 +42,7 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.bad_data).to be_falsey }
     end
 
-    context 'vacancy with two prisons' do
+    context 'with a vacancy with two prisons' do
       subject(:vacancy) { described_class.new(url, html) }
 
       let(:html) {

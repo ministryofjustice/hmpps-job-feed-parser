@@ -154,7 +154,7 @@ describe VacancyFormatter do
       end
     end
 
-    context 'given a vacancy in two prisons' do
+    context 'when a vacancy has two prisons' do
       subject(:formatted) { described_class.format_vacancy(vacancy) }
 
       let(:vacancy) do
