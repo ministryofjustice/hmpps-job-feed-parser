@@ -151,7 +151,6 @@ describe WcnScraper::Prison do
     context 'given a string containing two prisons, one of which has text contained in the other, ordered ascending' do
       subject(:prisons) { described_class.find_in_string('201706: Prison Officer - HMP Bourne & HMP Bournemouth') }
 
-
       it 'returns an array of Prison instances' do
         expect(prisons).to all(be_a(described_class))
       end
@@ -161,11 +160,7 @@ describe WcnScraper::Prison do
       end
 
       it 'returns the correct prisons' do
-        stub_const('PRISONS',
-                   [
-                     { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' },
-                     { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' }
-                   ])
+        stub_const('PRISONS', [{ name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }, { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' }])
 
         expected_prisons = [
           { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' },
@@ -186,11 +181,7 @@ describe WcnScraper::Prison do
       end
 
       it 'returns the correct prisons' do
-        stub_const('PRISONS',
-                   [
-                     { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' },
-                     { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
-                   ])
+        stub_const('PRISONS', [{ name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' }, { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }])
 
         expected_prisons = [
           { name: 'HMP Bournemouth', town: 'Bournemouth', lat: 0.5495271, lng: 2.9963275, type: 'Youth Custody' },
@@ -207,18 +198,12 @@ describe WcnScraper::Prison do
       end
 
       it 'returns one result' do
-        stub_const('PRISONS',
-                   [
-                     { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
-                   ])
+        stub_const('PRISONS', [{ name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }])
         expect(prisons.count).to eq(1)
       end
 
       it 'returns the correct prisons' do
-        stub_const('PRISONS',
-                   [
-                     { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }
-                   ])
+        stub_const('PRISONS', [{ name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }])
 
         expected_prisons = [
           { name: 'HMP Bourne', town: 'Bourne End', lat: 50.5495271, lng: -3.9963275, type: 'Youth Custody' }

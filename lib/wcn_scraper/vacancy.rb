@@ -51,7 +51,7 @@ module WcnScraper
       purported_prisons = the_title.partition(boilerplate).last
       known_prisons = PRISONS.select { |p| purported_prisons.include? p[:name] }
       # Take out the prisons that we know of, longest first (to avoid substring comparisons)
-      known_prisons.sort_by! {|x| x[:name].length * -1}
+      known_prisons.sort_by! { |x| x[:name].length * -1 }
       known_prisons.each do |site|
         prison_name = site[:name]
         purported_prisons[prison_name] = ''
