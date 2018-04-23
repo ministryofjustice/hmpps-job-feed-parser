@@ -1383,16 +1383,6 @@
   :lat: 54.5432115
   :lng: -1.9367631
   :type: Prison
-- :name: HMYOI Feltham
-  :town: Feltham
-  :lat: 51.4415566
-  :lng: -0.4340565
-  :type: Prison
-- :name: HMYOI Werrington
-  :town: Stoke-on-Trent
-  :lat: 53.02273779999999
-  :lng: -2.0871984
-  :type: Prison
 - :name: HMYOI Elmley
   :town: Eastchurch
   :lat: 51.3884000
