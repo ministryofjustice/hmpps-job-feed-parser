@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gem 'awesome_print'
 gem 'pry-byebug'
 gem 'rake'
-gem 'slack-ruby-client'
 
 group :test do
   gem 'simplecov', require: false
