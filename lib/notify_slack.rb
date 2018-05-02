@@ -3,7 +3,7 @@ require 'uri'
 
 class NotifySlack
   attr_reader :target, :message, :icon_emoji, :response
-  def initialize (target = 'Slack URL hook', message = 'Test Message', icon_emoji = ':ghost:')
+  def initialize(target = 'Slack URL hook', message = 'Test Message', icon_emoji = ':ghost:')
     @target = target
     @message = message
     @icon_emoji = icon_emoji
@@ -20,7 +20,7 @@ class NotifySlack
     req_options = {
       use_ssl: uri.scheme == 'https'
     }
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) { |http|
+    Net::HTTP.start(uri.hostname, uri.port, req_options) { |http|
       http.request(request)
     }
   end

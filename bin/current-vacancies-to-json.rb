@@ -28,6 +28,7 @@ def main
   logger.info("bad data size: %p" % collection.invalid.size)
   # collection.vacancies is an array of Vacancy objects (for valid vacancies)
   # collection.invalid is an array of vacancies without a matching prison
+  report_success(collection.invalid.size)
 end
 
 def get_rss_content
@@ -67,5 +68,20 @@ def filtered_vacancies(formatted_vacancies, filter)
   else
     formatted_vacancies
   end
+end
+def count_vacancies(formatted_vacancies, filter)
+  if filter == 'Youth Custody'
+    formatted_vacancies.count {|v| v[:type] == filter}
+  else
+    formatted_vacancies.count
+  end
+end
+def report_success(formatted_vacancies, bad_record_count)
+  message = 'Job Feed succeeded\n'
+  message += "Prison Officer: #{count_vacancies(formatted_vacancies, 'Prison')}\n"
+  message += "Youth Custody: #{count_vacancies(formatted_vacancies, 'Youth Custody')}\n"
+  message += "Bad data: #{bad_record_count}\n" unless bad_record_count == 0
+  message += "Link to unrecognised data:\nhttps://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/unidentified-prison-names.html" unless bad_record_count == 0
+  notify_slack = NotifySlack.new  ENV['SLACK_URL'], message, ENV['SLACK_AVATAR']
 end
 main

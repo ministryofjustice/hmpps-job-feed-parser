@@ -8,7 +8,7 @@ describe NotifySlack do
     puts slack_url
     stub_request(:post, slack_url).
       to_return(status: 200, body: "", headers: {})
-    notify_slack = described_class.new  slack_url, 'Job Complete', ':+1:'
+    notify_slack = described_class.new slack_url, 'Job Complete', ':+1:'
     expect(notify_slack.response).to eq('200')
   end
 end
