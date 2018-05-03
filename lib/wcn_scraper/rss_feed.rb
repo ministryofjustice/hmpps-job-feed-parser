@@ -15,7 +15,7 @@ module WcnScraper
         rss = rss_content rss
         filter_feed_items(rss, /prison.officer/i)
       else
-        NotifySlack.new ENV['SLACK_URL'], "Failed to get WCN data \n Resonded with #{response.code} ':ppjfeednotok:'
+        NotifySlack.new ENV['SLACK_URL'], "Failed to get WCN data \n Responded with #{response.code}" ':ppjfeednotok:'
       end
     end
 
