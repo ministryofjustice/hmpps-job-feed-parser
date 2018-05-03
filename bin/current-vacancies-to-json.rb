@@ -16,8 +16,9 @@ PRISONS = YAML.load_file('data/prisons.yaml')
 def main
   # feed = get_rss_content
   # vacancies = filter_feed_items(feed, /prison.officer/i)
-  rssfeed = WcnScraper::RssFeed.new()
+  rssfeed = WcnScraper::RssFeed.new
   vacancies = rssfeed.vacancies_data
+  exit unless vacancies != 'Feed is not available'
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
   good_data_to_file(collection.vacancies, 'good-data.json', 'Prison')
@@ -28,7 +29,7 @@ def main
   logger.info("bad data size: %p" % collection.invalid.size)
   # collection.vacancies is an array of Vacancy objects (for valid vacancies)
   # collection.invalid is an array of vacancies without a matching prison
-  report_success(collection.invalid.size)
+  report_success(formatted_vacancies, collection.invalid.size)
 end
 
 def get_rss_content
