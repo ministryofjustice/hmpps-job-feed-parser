@@ -120,6 +120,10 @@ Prison data which did not match with any prison is added to vacancies-bad-data.j
 
 This file needs to be manually copied to S3 bucket "hmpps-feed-parser".
 
-The feed uses a Slack webhook for feedback the relies upon two Environment variables: 
-SLACK_URL for the full url of the webhook
-SLACK_AVATAR for the icon associated with the message sender (to readily indicate status amongst other feeds)
+## Slack Notification
+
+The feed uses a Slack webhook for feedback this relies upon two Environment variables:
+
+SLACK_URL for the full url of the webhook.
+
+SLACK_AVATAR for the icon associated with the message sender (to readily indicate status amongst other feeds).
