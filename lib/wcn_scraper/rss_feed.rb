@@ -7,9 +7,17 @@ module WcnScraper
 
     def vacancies_data
       url = URI.parse(ENDPOINT)
-      rss = Net::HTTP.get(url)
-      rss = rss_content rss
-      filter_feed_items(rss, /prison.officer/i)
+      response = Net::HTTP.get_response(URI(url))
+
+      case response
+      when Net::HTTPSuccess then
+        rss = Net::HTTP.get(url)
+        rss = rss_content rss
+        filter_feed_items(rss, /prison.officer/i)
+      else
+        NotifySlack.new ENV['SLACK_URL'], "Failed to get WCN data \n Responded with #{response.code}" ':ppjfeednotok:'
+        return 'Feed is not available'
+      end
     end
 
     def rss_content(url)

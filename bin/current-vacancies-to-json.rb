@@ -6,6 +6,7 @@ require 'pp'
 require_relative '../lib/wcn_scraper'
 require 'json'
 require_relative '../lib/vacancy_formatter'
+require_relative '../lib/notify_slack'
 require 'logger'
 require 'aws-sdk-s3'
 
@@ -16,18 +17,22 @@ PRISONS = YAML.load_file('data/prisons.yaml')
 def main
   # feed = get_rss_content
   # vacancies = filter_feed_items(feed, /prison.officer/i)
-  rssfeed = WcnScraper::RssFeed.new()
+  rssfeed = WcnScraper::RssFeed.new
   vacancies = rssfeed.vacancies_data
+  exit unless vacancies != 'Feed is not available'
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
-  good_data_to_file(collection.vacancies, 'good-data.json', 'Prison')
-  good_data_to_file(collection.vacancies, 'good-youth-custody-data.json', 'Youth Custody')
+  formatted_vacancies = VacancyFormatter.output(collection.vacancies)
+  good_data_to_file(formatted_vacancies, 'good-data.json', 'Prison')
+  good_data_to_file(formatted_vacancies, 'good-youth-custody-data.json', 'Youth Custody')
+
   write_data_to_s3
   logger = Logger.new(STDOUT)
   logger.info("good data size: %p" % collection.vacancies.size)
   logger.info("bad data size: %p" % collection.invalid.size)
   # collection.vacancies is an array of Vacancy objects (for valid vacancies)
   # collection.invalid is an array of vacancies without a matching prison
+  report_success(formatted_vacancies, collection.invalid.size)
 end
 
 def get_rss_content
@@ -41,8 +46,7 @@ def filter_feed_items(rss_feed, regexp)
     !regexp.match(item.title.content).nil?
   end
 end
-def good_data_to_file(list, file_name, filter)
-  formatted_vacancies = VacancyFormatter.output(list)
+def good_data_to_file(formatted_vacancies, file_name, filter)
   File.open(file_name, 'w') do |file|
     file.write(filtered_vacancies(formatted_vacancies, filter).to_json)
   end
@@ -67,5 +71,20 @@ def filtered_vacancies(formatted_vacancies, filter)
   else
     formatted_vacancies
   end
+end
+def count_vacancies(formatted_vacancies, filter)
+  if filter == 'Youth Custody'
+    formatted_vacancies.count {|v| v[:type] == filter}
+  else
+    formatted_vacancies.count
+  end
+end
+def report_success(formatted_vacancies, bad_record_count)
+  message = 'Job Feed succeeded\n'
+  message += "Prison Officer: #{count_vacancies(formatted_vacancies, 'Prison')}\n"
+  message += "Youth Custody: #{count_vacancies(formatted_vacancies, 'Youth Custody')}\n"
+  message += "Bad data: #{bad_record_count}\n" unless bad_record_count == 0
+  message += "Link to unrecognised data:\nhttps://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/unidentified-prison-names.html" unless bad_record_count == 0
+  notify_slack = NotifySlack.new  ENV['SLACK_URL'], message, ENV['SLACK_AVATAR']
 end
 main

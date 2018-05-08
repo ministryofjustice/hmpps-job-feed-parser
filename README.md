@@ -119,3 +119,11 @@ The container will execute the ruby script `bin/current-vacancies-to-json.rb` an
 Prison data which did not match with any prison is added to vacancies-bad-data.json file in s3. The data in json file is surfaced to business users using unidentified-prison-names.html file.
 
 This file needs to be manually copied to S3 bucket "hmpps-feed-parser".
+
+## Slack Notification
+
+The feed uses a Slack webhook for feedback this relies upon two Environment variables:
+
+SLACK_URL for the full url of the webhook.
+
+SLACK_AVATAR for the icon associated with the message sender (to readily indicate status amongst other feeds).
