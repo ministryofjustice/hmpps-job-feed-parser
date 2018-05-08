@@ -6,6 +6,7 @@ require 'pp'
 require_relative '../lib/wcn_scraper'
 require 'json'
 require_relative '../lib/vacancy_formatter'
+require_relative '../lib/notify_slack'
 require 'logger'
 require 'aws-sdk-s3'
 
@@ -21,8 +22,10 @@ def main
   exit unless vacancies != 'Feed is not available'
   collection = WcnScraper::VacancyCollection.new(vacancies)
   bad_data_to_file(collection.invalid)
-  good_data_to_file(collection.vacancies, 'good-data.json', 'Prison')
-  good_data_to_file(collection.vacancies, 'good-youth-custody-data.json', 'Youth Custody')
+  formatted_vacancies = VacancyFormatter.output(collection.vacancies)
+  good_data_to_file(formatted_vacancies, 'good-data.json', 'Prison')
+  good_data_to_file(formatted_vacancies, 'good-youth-custody-data.json', 'Youth Custody')
+
   write_data_to_s3
   logger = Logger.new(STDOUT)
   logger.info("good data size: %p" % collection.vacancies.size)
@@ -43,8 +46,7 @@ def filter_feed_items(rss_feed, regexp)
     !regexp.match(item.title.content).nil?
   end
 end
-def good_data_to_file(list, file_name, filter)
-  formatted_vacancies = VacancyFormatter.output(list)
+def good_data_to_file(formatted_vacancies, file_name, filter)
   File.open(file_name, 'w') do |file|
     file.write(filtered_vacancies(formatted_vacancies, filter).to_json)
   end
