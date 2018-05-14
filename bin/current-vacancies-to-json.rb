@@ -9,6 +9,7 @@ require_relative '../lib/vacancy_formatter'
 require_relative '../lib/notify_slack'
 require 'logger'
 require 'aws-sdk-s3'
+require 'date'
 
 RSS_URL = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed'
 
@@ -91,8 +92,8 @@ def report_success(formatted_vacancies, bad_record_count)
 end
 def summary_file(formatted_vacancies)
   File.open('summary.csv', 'w') do |file|
-    file.write('DateTime,PrisonJobs,YouthCustodyJobs')
-    file.write("#{},#{prison_jobs(formatted_vacancies)},#{youth_custody_jobs(formatted_vacancies)}")
+    file.write("DateTime,PrisonJobs,YouthCustodyJobs\n")
+    file.write("#{DateTime.now.strftime('%a %d %b %Y at %H:%M')},#{prison_jobs(formatted_vacancies)},#{youth_custody_jobs(formatted_vacancies)}")
   end
 end
 def prison_jobs(formatted_vacancies)
