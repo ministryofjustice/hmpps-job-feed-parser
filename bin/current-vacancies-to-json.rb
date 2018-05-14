@@ -9,6 +9,7 @@ require_relative '../lib/vacancy_formatter'
 require_relative '../lib/notify_slack'
 require 'logger'
 require 'aws-sdk-s3'
+require 'date'
 
 RSS_URL = 'https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed'
 
@@ -25,7 +26,7 @@ def main
   formatted_vacancies = VacancyFormatter.output(collection.vacancies)
   good_data_to_file(formatted_vacancies, 'good-data.json', 'Prison')
   good_data_to_file(formatted_vacancies, 'good-youth-custody-data.json', 'Youth Custody')
-
+  summary_file(formatted_vacancies)
   write_data_to_s3
   logger = Logger.new(STDOUT)
   logger.info("good data size: %p" % collection.vacancies.size)
@@ -64,6 +65,8 @@ def write_data_to_s3
   obj.upload_file('good-youth-custody-data.json')
   obj = s3.bucket('hmpps-feed-parser').object('vacancies-bad-data.json')
   obj.upload_file('bad-data.json')
+  obj = s3.bucket('hmpps-feed-parser').object('summary.csv')
+  obj.upload_file('summary.csv')
 end
 def filtered_vacancies(formatted_vacancies, filter)
   if filter == 'Youth Custody'
@@ -81,10 +84,22 @@ def count_vacancies(formatted_vacancies, filter)
 end
 def report_success(formatted_vacancies, bad_record_count)
   message = 'Job Feed succeeded\n'
-  message += "Prison Officer: #{count_vacancies(formatted_vacancies, 'Prison')}\n"
-  message += "Youth Custody: #{count_vacancies(formatted_vacancies, 'Youth Custody')}\n"
+  message += "Prison Officer: #{prison_jobs(formatted_vacancies)}\n"
+  message += "Youth Custody: #{youth_custody_jobs(formatted_vacancies)}\n"
   message += "Bad data: #{bad_record_count}\n" unless bad_record_count == 0
   message += "Link to unrecognised data:\nhttps://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/unidentified-prison-names.html" unless bad_record_count == 0
   notify_slack = NotifySlack.new  ENV['SLACK_URL'], message, ENV['SLACK_AVATAR']
+end
+def summary_file(formatted_vacancies)
+  File.open('summary.csv', 'w') do |file|
+    file.write("DateTime,PrisonJobs,YouthCustodyJobs\n")
+    file.write("#{DateTime.now.strftime('%a %d %b %Y at %H:%M')},#{prison_jobs(formatted_vacancies)},#{youth_custody_jobs(formatted_vacancies)}")
+  end
+end
+def prison_jobs(formatted_vacancies)
+  count_vacancies(formatted_vacancies, 'Prison')
+end
+def youth_custody_jobs(formatted_vacancies)
+  count_vacancies(formatted_vacancies, 'Youth Custody')
 end
 main
