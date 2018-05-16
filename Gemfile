@@ -5,10 +5,12 @@ source 'https://rubygems.org'
 gem 'awesome_print'
 gem 'pry-byebug'
 gem 'rake'
+gem 'geckoboard-ruby'
 
 group :test do
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'timecop'
 end
 
 group :development do
