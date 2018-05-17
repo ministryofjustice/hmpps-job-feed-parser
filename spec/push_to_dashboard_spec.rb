@@ -1,17 +1,24 @@
+require 'date'
 require 'rspec'
 require_relative 'spec_helper'
 require 'webmock/rspec'
+require 'timecop'
+require 'geckoboard'
 
 describe PushToDashboard do
+  before do
+    Timecop.freeze
+  end
+
   it 'Returns truthy' do
-    Timecop.freeze(Time.now)
     this = {
-        timestamp: DateTime.now,
-        prison_jobs_today: 1,
-        youth_custody_jobs_today: 1
+      timestamp: Time.now,
+      prison_jobs_today: 1,
+      youth_custody_jobs_today: 1
     }
-    allow(dataset.post).to receive(this) {true}
-    push_to_dashboard = described_class.new ENV('DASHBOARD_KEY') 1 1
+#    allow(described_class.dataset.post).to receive(this).and_return(true)
+    push_to_dashboard = described_class.new('a key', 1, 1)
+    allow(described_class.dataset.post).to receive(this).and_return(true)
     expect(push_to_dashboard).to be_truthy
   end
 end
