@@ -11,14 +11,11 @@ describe PushToDashboard do
   end
 
   it 'Returns truthy' do
-    this = {
-      timestamp: Time.now,
-      prison_jobs_today: 1,
-      youth_custody_jobs_today: 1
-    }
-#    allow(described_class.dataset.post).to receive(this).and_return(true)
-    push_to_dashboard = described_class.new('a key', 1, 1)
-    allow(described_class.dataset.post).to receive(this).and_return(true)
+
+    stub_request(:any, "https://api.geckoboard.com/").to_return(status:200, body: "", headers: {})
+    stub_request(:put, "https://api.geckoboard.com/datasets/ppj.stats").to_return(status:200, body: "", headers: {})
+
+    push_to_dashboard = described_class.new(ENV['DASHBOARD_KEY'], 1, 1)
     expect(push_to_dashboard).to be_truthy
   end
 end
