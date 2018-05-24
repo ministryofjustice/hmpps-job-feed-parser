@@ -6,7 +6,7 @@ class PushToDashboard
 
     dataset.post([
                    {
-                     timestamp: DateTime.now.strftime('%d/%m/%Y %H:%M'),
+                     timestamp: Time.now.strftime('%d/%m/%Y %H:%M'),
                      prison_jobs_today: prison_vacs,
                      youth_custody_jobs_today: youth_custody_vacs,
                      bad_records: bad_records
@@ -24,7 +24,7 @@ class PushToDashboard
         Geckoboard::NumberField.new(:prison_jobs_today, name: 'Prison Jobs', optional: true),
         Geckoboard::NumberField.new(:youth_custody_jobs_today, name: 'Youth Custody Jobs', optional: true),
         Geckoboard::NumberField.new(:bad_records, name: 'Bad Records', optional: true)
-    ], unique_by: [:timestamp]
+      ], unique_by: [:timestamp]
     )
   end
 end
