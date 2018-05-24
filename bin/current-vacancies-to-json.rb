@@ -7,6 +7,7 @@ require_relative '../lib/wcn_scraper'
 require 'json'
 require_relative '../lib/vacancy_formatter'
 require_relative '../lib/notify_slack'
+require_relative '../lib/push_to_dashboard'
 require 'logger'
 require 'aws-sdk-s3'
 require 'date'
@@ -88,7 +89,8 @@ def report_success(formatted_vacancies, bad_record_count)
   message += "Youth Custody: #{youth_custody_jobs(formatted_vacancies)}\n"
   message += "Bad data: #{bad_record_count}\n" unless bad_record_count == 0
   message += "Link to unrecognised data:\nhttps://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/unidentified-prison-names.html" unless bad_record_count == 0
-  notify_slack = NotifySlack.new  ENV['SLACK_URL'], message, ENV['SLACK_AVATAR']
+  NotifySlack.new  ENV['SLACK_URL'], message, ENV['SLACK_AVATAR']
+  PushToDashboard.new prison_jobs(formatted_vacancies), youth_custody_jobs(formatted_vacancies), bad_record_count
 end
 def summary_file(formatted_vacancies)
   File.open('summary.csv', 'w') do |file|
