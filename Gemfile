@@ -3,11 +3,13 @@
 source 'https://rubygems.org'
 
 gem 'awesome_print'
+gem 'geckoboard-ruby'
 gem 'pry-byebug'
 gem 'rake'
 
 group :test do
   gem 'simplecov', require: false
+  gem 'timecop'
   gem 'webmock'
 end
 

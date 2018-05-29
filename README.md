@@ -127,3 +127,9 @@ The feed uses a Slack webhook for feedback this relies upon two Environment vari
 SLACK_URL for the full url of the webhook.
 
 SLACK_AVATAR for the icon associated with the message sender (to readily indicate status amongst other feeds).
+
+## Geckoboard Updates
+
+We use a Geckoboard for real-time updates on the site. The feed publishes stats of vacancies and the Date/Time at which it has run. To set this up use the environment variable:
+
+DASHBOARD_KEY this allows the Geckoboard to receive data for the dataset widget. 

@@ -3,6 +3,7 @@ env:
     - CC_TEST_REPORTER_ID=59fac28c93bf0400eac9ea23036854321f116769a4deb5278b5bef491e888d8e
     - SLACK_URL=https://thisisadummy.com
     - SLACK_AVATAR=YourFace
+    - DASHBOARD_KEY=NoneOfYourBusiness
 language: ruby
 rvm:
   - 2.3.1

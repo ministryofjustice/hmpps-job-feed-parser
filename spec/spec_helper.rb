@@ -4,7 +4,10 @@ SimpleCov.start
 require_relative '../lib/wcn_scraper'
 require_relative '../lib/vacancy_formatter'
 require_relative '../lib/notify_slack'
+require_relative '../lib/push_to_dashboard'
 require 'rspec'
+
+ENV['DASHBOARD_KEY'] = 'Nothingtoseehere'
 
 RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
