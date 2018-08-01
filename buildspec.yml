@@ -20,7 +20,7 @@ phases:
       - echo Using build tag `latest`
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 613903586696.dkr.ecr.eu-west-2.amazonaws.com/wp/$APPNAME
+      - docker push 613903586696.dkr.ecr.eu-west-2.amazonaws.com/$APPNAME
 artifacts:
   files:
     - BUILD_TAG.txt
