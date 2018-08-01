@@ -14,13 +14,13 @@ phases:
       - echo Build started on `date`
       - echo Building Docker image with tag $APPNAME:`latest`
       - docker build -t $APPNAME .
-      - docker tag $APPNAME:`latest` 613903586696.dkr.ecr.eu-west-2.amazonaws.com/$APPNAME:`latest`
+      - docker tag $APPNAME 613903586696.dkr.ecr.eu-west-2.amazonaws.com/$APPNAME
   post_build:
     commands:
       - echo Using build tag `latest`
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 613903586696.dkr.ecr.eu-west-2.amazonaws.com/wp/$APPNAME:`latest`
+      - docker push 613903586696.dkr.ecr.eu-west-2.amazonaws.com/wp/$APPNAME
 artifacts:
   files:
     - BUILD_TAG.txt
