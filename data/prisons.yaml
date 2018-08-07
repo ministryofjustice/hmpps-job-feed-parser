@@ -418,12 +418,12 @@
   :lat: 52.495993
   :lng: -0.9608316
   :type: Prison
-- :name: HMP Grendon/Springhill
+- :name: HMP Grendon
   :town: Aylesbury
   :lat: 51.8931365
   :lng: -1.0072932
   :type: Prison
-- :name: HMP Grendon
+- :name: HMP Grendon/Springhill
   :town: Aylesbury
   :lat: 51.8931365
   :lng: -1.0072932
@@ -443,11 +443,6 @@
   :lat: 52.3246695
   :lng: -1.9870964
   :type: Prison
-- :name: HMP High Down
-  :town: Sutton
-  :lat: 51.3357233
-  :lng: -0.1890383
-  :type: Prison
 - :name: HMP Highpoint
   :town: Newmarket
   :lat: 52.136974
@@ -462,11 +457,6 @@
   :town: Henley-on-Thames
   :lat: 51.5874
   :lng: -1.0183
-  :type: Prison
-- :name: HMP Isle of Wight
-  :town: Newport
-  :lat: 50.713196
-  :lng: -1.3076464
   :type: Prison
 - :name: HMP Kirkham
   :town: Preston
@@ -658,7 +648,7 @@
   :lat: 53.5246134
   :lng: -1.1459719
   :type: Prison
-- :name: HMP/YOI Downview &
+- :name: HMP/YOI Downview
   :town: Sutton
   :lat: 51.3384631
   :lng: -0.1880442
@@ -923,7 +913,7 @@
   :lat: 53.5246134
   :lng: -1.1459719
   :type: Prison
-- :name: HMP & YOI Downview &
+- :name: HMP & YOI Downview
   :town: Sutton
   :lat: 51.3384631
   :lng: -0.1880442
@@ -1188,7 +1178,7 @@
   :lat: 53.5246134
   :lng: -1.1459719
   :type: Prison
-- :name: HMYOI Downview &
+- :name: HMYOI Downview
   :town: Sutton
   :lat: 51.3384631
   :lng: -0.1880442
@@ -1488,11 +1478,6 @@
   :lat: 53.9356199
   :lng: -1.3693436
   :type: Youth Custody
-- :name: HMYOI Elmley
-  :town: Eastchurch
-  :lat: 51.3884000
-  :lng: 0.8499000
-  :type: Prison
 - :name: IRC Verne
   :town: Moffat
   :lat: 50.5615548
@@ -1543,4 +1528,3 @@
   :lat: 51.3613387
   :lng: 0.4941801
   :type: Youth Custody
-  
