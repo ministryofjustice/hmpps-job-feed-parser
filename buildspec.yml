@@ -14,7 +14,7 @@ phases:
       - echo Build started on `date`
       - echo Building Docker image with tag $APPNAME:`cat BUILD_TAG.txt`
       - docker build -t $APPNAME:`cat BUILD_TAG.txt` .
-      - docker tag $APPNAME:`cat BUILD_TAG.txt` 613903586696.dkr.ecr.eu-west-2.amazonaws.com/wp/$APPNAME:`cat BUILD_TAG.txt`
+      - docker tag $APPNAME:`cat BUILD_TAG.txt` 613903586696.dkr.ecr.eu-west-2.amazonaws.com/$APPNAME:`cat BUILD_TAG.txt`
   post_build:
     commands:
       - echo Using build tag `latest`
