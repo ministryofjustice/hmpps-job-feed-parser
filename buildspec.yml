@@ -12,15 +12,15 @@ phases:
       - echo -n -`date "+%Y%m%d%H%M"` >> BUILD_TAG.txt
       - echo Created build tag `cat BUILD_TAG.txt`
       - echo Build started on `date`
-      - echo Building Docker image with tag $APPNAME:`latest`
-      - docker build -t $APPNAME .
-      - docker tag $APPNAME 613903586696.dkr.ecr.eu-west-2.amazonaws.com/$APPNAME
+      - echo Building Docker image with tag $APPNAME:`cat BUILD_TAG.txt`
+      - docker build -t $APPNAME:`cat BUILD_TAG.txt` .
+      - docker tag $APPNAME:`cat BUILD_TAG.txt` 613903586696.dkr.ecr.eu-west-2.amazonaws.com/wp/$APPNAME:`cat BUILD_TAG.txt`
   post_build:
     commands:
       - echo Using build tag `latest`
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 613903586696.dkr.ecr.eu-west-2.amazonaws.com/$APPNAME
+      - docker push 613903586696.dkr.ecr.eu-west-2.amazonaws.com/$APPNAME:`cat BUILD_TAG.txt`
 artifacts:
   files:
     - BUILD_TAG.txt
