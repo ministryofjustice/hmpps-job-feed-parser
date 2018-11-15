@@ -13,7 +13,7 @@ module WcnScraper
       when Net::HTTPSuccess then
         rss = Net::HTTP.get(url)
         rss = rss_content rss
-        filter_feed_items(rss, /prison.officer/i)
+        filter_feed_items(rss, /(Prison Officer | Youth Justice Worker)/i)
       else
         NotifySlack.new ENV['SLACK_URL'], "Failed to get WCN data \n Responded with #{response.code}" ':ppjfeednotok:'
         return 'Feed is not available'
