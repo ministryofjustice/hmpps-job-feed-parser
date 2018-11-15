@@ -33,7 +33,7 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.id).to eq('9908') }
       specify { expect(vacancy.url).to eq(url) }
       specify { expect(vacancy.title).to eq('201706: Prison Officer - HMP/YOI Downview') }
-      specify { expect(vacancy.role).to eq('prison-officer') }
+      specify { expect(vacancy.role).to eq('Operational Delivery,prison-officer') }
       specify { expect(vacancy.salary).to eq('£31,453') }
       specify { expect(vacancy.prisons.count).to eq(1) }
       specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }
@@ -62,7 +62,7 @@ describe WcnScraper::Vacancy do
       specify { expect(vacancy.id).to eq('14225') }
       specify { expect(vacancy.url).to eq(url) }
       specify { expect(vacancy.title).to eq('201711: Prison Officer - HMP Littlehey & HMP Stocken') }
-      specify { expect(vacancy.role).to eq('prison-officer') }
+      specify { expect(vacancy.role).to eq('Operational Delivery,prison-officer') }
       specify { expect(vacancy.salary).to eq('£22,396') }
       specify { expect(vacancy.prisons.count).to eq(2) }
       specify { expect(vacancy.prisons).to all(be_a(WcnScraper::Prison)) }

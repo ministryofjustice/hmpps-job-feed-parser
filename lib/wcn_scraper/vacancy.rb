@@ -9,7 +9,7 @@ module WcnScraper
       @closing_date = the_closing_date
       @id = the_id
       @prisons = the_prisons
-      @role = 'prison-officer' # hardcoded until other roles are introduced
+      @role = the_role # hardcoded until other roles are introduced
       @salary = the_salary
       @title = the_title
       @url = url
@@ -24,6 +24,10 @@ module WcnScraper
 
     def the_title
       get_string('Vacancy Title')
+    end
+
+    def the_role
+      get_string('Role Type')
     end
 
     def the_salary

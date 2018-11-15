@@ -60,7 +60,7 @@ describe VacancyFormatter do
         [
           {
             title: '201706: Prison Officer - HMP/YOI Cefereso No. 9',
-            role: 'prison-officer',
+            role: 'Operational Delivery,prison officer',
             salary: '31453',
             closing_date: '07/07/2017',
             prison_name: 'HMP/YOI Cefereso No. 9',
@@ -70,7 +70,7 @@ describe VacancyFormatter do
           },
           {
             title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
-            role: 'prison-officer',
+            role: 'Operational Delivery,prison officer',
             salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Penal del Altiplano',
@@ -80,7 +80,7 @@ describe VacancyFormatter do
           },
           {
             title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
-            role: 'prison-officer',
+            role: 'Operational Delivery,prison officer',
             salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Islas Marías Federal Prison',
@@ -90,7 +90,7 @@ describe VacancyFormatter do
           },
           {
             title: '201710: Prison Officer - HMP/YOI Palacio de Lecumberri',
-            role: 'prison-officer',
+            role: 'Operational Delivery,prison officer',
             salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP/YOI Palacio de Lecumberri',
@@ -134,7 +134,7 @@ describe VacancyFormatter do
         [
           {
             title: '201706: Prison Officer - HMP/YOI Cefereso No. 9',
-            role: 'prison-officer',
+            role: 'Operational Delivery,Prison Officer',
             salary: '31453',
             closing_date: '07/07/2017',
             prison_name: 'HMP/YOI Cefereso No. 9',
@@ -176,7 +176,7 @@ describe VacancyFormatter do
         [
           {
             title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
-            role: 'prison-officer',
+            role: 'Operational Delivery,Prison Officer',
             salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Penal del Altiplano',
@@ -186,7 +186,7 @@ describe VacancyFormatter do
           },
           {
             title: '201711: Prison Officer - HMP Penal del Altiplano & HMP Islas Marías Federal Prison',
-            role: 'prison-officer',
+            role: 'Operational Delivery,Prison Officer',
             salary: '22396',
             closing_date: '30/11/2017',
             prison_name: 'HMP Islas Marías Federal Prison',

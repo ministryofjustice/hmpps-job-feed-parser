@@ -12,6 +12,7 @@ describe WcnScraper::VacancyCollection do
 
       rss_feed = WcnScraper::RssFeed.new
       vacancies = rss_feed.vacancies_data
+      puts vacancies
       described_class.new(vacancies)
     end
 
