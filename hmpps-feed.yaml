@@ -41,6 +41,7 @@ Resources:
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
+      TaskRoleArn : RoleArn: !GetAtt ['ECSRole', 'Arn']
       ContainerDefinitions:
         - Name: HMPPS
           Environment:
