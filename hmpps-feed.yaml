@@ -15,6 +15,9 @@ Parameters:
     Description: "Max allocated memory for a container"
     Type: Number
     Default: 256
+  TaskRoleArn:
+    Description: "ARN for task task-schedular"
+    Type: String
 Mappings:
   EnvironmentMap:
     development:
@@ -41,7 +44,7 @@ Resources:
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      TaskRoleArn : !GetAtt ['ECSRole', 'Arn']
+      TaskRoleArn: !Ref TaskRoleArn
       ContainerDefinitions:
         - Name: HMPPS
           Environment:
