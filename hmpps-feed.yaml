@@ -21,16 +21,19 @@ Mappings:
       HostedZone: dev.wp.dsd.io.
       AWSLogGroup: wp-dev
       ECSCluster: wp-dev
+      Folder: dev
     staging:
       HostedZone: staging.wp.dsd.io.
       Hostname: staging.wp.dsd.io
       AWSLogGroup: wp-staging
       ECSCluster: wp-staging
+      Folder: staging
     production:
       HostedZone: prod.wp.dsd.io.
       Hostname: prod.wp.dsd.io
       AWSLogGroup: wp-production
       ECSCluster: wp-production
+      Folder: /
 Resources:
   ##
   # ECS task & service
@@ -39,7 +42,14 @@ Resources:
     Type: AWS::ECS::TaskDefinition
     Properties:
       ContainerDefinitions:
-        - Name: test
+        - Name: HMPPS
+          Environment:
+          - Name: FILE_PATH
+            Value: !FindInMap [ EnvironmentMap, !Ref Environment, Folder ]
+          - Name: SLACK_AVATAR  
+            Value: :ppjfeedok:
+          - Name: SLACK_URL
+            Value: https://hooks.slack.com/services/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  
           Essential: 'true'
           Image: !Ref DockerImage
           Memory: !Ref Memory
