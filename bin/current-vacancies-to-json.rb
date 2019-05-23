@@ -60,13 +60,13 @@ def bad_data_to_file(list)
 end
 def write_data_to_s3
   s3 = Aws::S3::Resource.new(region:'eu-west-2')
-  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'/vacancies.json')
+  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'vacancies.json')
   obj.upload_file('good-data.json')
-  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'/youth-custody-vacancies.json')
+  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'youth-custody-vacancies.json')
   obj.upload_file('good-youth-custody-data.json')
-  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'/vacancies-bad-data.json')
+  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'vacancies-bad-data.json')
   obj.upload_file('bad-data.json')
-  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'/summary.csv')
+  obj = s3.bucket('hmpps-feed-parser').object(ENV['FILE_PATH']+'summary.csv')
   obj.upload_file('summary.csv')
 end
 def filtered_vacancies(formatted_vacancies, filter)
