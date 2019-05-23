@@ -24,7 +24,7 @@ Mappings:
       HostedZone: dev.wp.dsd.io.
       AWSLogGroup: wp-dev
       ECSCluster: wp-dev
-      Folder: dev//\
+      Folder: dev/
     staging:
       HostedZone: staging.wp.dsd.io.
       Hostname: staging.wp.dsd.io
@@ -36,7 +36,7 @@ Mappings:
       Hostname: prod.wp.dsd.io
       AWSLogGroup: wp-production
       ECSCluster: wp-production
-      Folder: /\
+      Folder: prod/
 Resources:
   ##
   # ECS task & service
