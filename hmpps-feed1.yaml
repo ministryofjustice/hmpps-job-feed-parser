@@ -1,0 +1,109 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  DockerImage:
+    Description: "Docker image to use (including tag)"
+    Type: String
+  Environment:
+    Description: "The environment this application should run in."
+    Type: String
+    Default: development
+    AllowedValues:
+      - development
+      - staging
+      - production
+  Memory:
+    Description: "Max allocated memory for a container"
+    Type: Number
+    Default: 256
+  TaskRoleArn:
+    Description: "ARN for task task-schedular"
+    Type: String
+Mappings:
+  EnvironmentMap:
+    development:
+      HostedZone: dev.wp.dsd.io.
+      AWSLogGroup: wp-dev
+      ECSCluster: wp-dev
+      Folder: dev
+    staging:
+      HostedZone: staging.wp.dsd.io.
+      Hostname: staging.wp.dsd.io
+      AWSLogGroup: wp-staging
+      ECSCluster: wp-staging
+      Folder: staging
+    production:
+      HostedZone: prod.wp.dsd.io.
+      Hostname: prod.wp.dsd.io
+      AWSLogGroup: wp-production
+      ECSCluster: wp-production
+      Folder: /
+Resources:
+  ##
+  # ECS task & service
+  ##
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      TaskRoleArn: !Ref TaskRoleArn
+      ContainerDefinitions:
+        - Name: HMPPS
+          Environment:
+          - Name: FILE_PATH
+            Value: !FindInMap [ EnvironmentMap, !Ref Environment, Folder ]
+          - Name: SLACK_AVATAR  
+            Value: ":ppjfeedok:"
+          - Name: SLACK_URL
+            Value: "https://hooks.slack.com/services/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"  
+          Essential: 'true'
+          Image: !Ref DockerImage
+          Memory: !Ref Memory
+          Privileged: 'true'
+          PortMappings:
+            - ContainerPort: 80
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref AWS::StackName
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: ecs
+      Family: !Ref AWS::StackName
+  ECSRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+      Policies:
+        - PolicyName: ECSPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action:
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Effect: Allow
+                Resource: !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/${AWS::StackName}/*:log-stream:*'
+              - Action:
+                  - ecs:ListTasks
+                  - ecs:DescribeTasks
+                Effect: Allow
+                Resource: '*'
+  TaskSchedule:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: !Sub 'Execute the task once each nightr the HMPPS Job Feed Parser should have executed.'
+      ScheduleExpression: cron(* * * * ? *)
+      State: ENABLED
+      Targets:
+        - Arn: !Sub 
+          - 'arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/${ClusterName}'
+          - { ClusterName: !FindInMap [ EnvironmentMap, !Ref Environment, ECSCluster ] }
+          Id: task-schedular
+          EcsParameters:
+            TaskCount: 1
+            TaskDefinitionArn: !Ref 'TaskDefinition'
+          RoleArn: !GetAtt ['ECSRole', 'Arn']

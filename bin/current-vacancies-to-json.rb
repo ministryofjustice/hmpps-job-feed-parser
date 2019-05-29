@@ -90,7 +90,7 @@ def report_success(formatted_vacancies, bad_record_count)
   message += "Bad data: #{bad_record_count}\n" unless bad_record_count == 0
   message += "Link to unrecognised data:\nhttps://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/prod/unidentified-prison-names.html" unless bad_record_count == 0
   NotifySlack.new  ENV['SLACK_URL'], message, ENV['SLACK_AVATAR']
-  PushToDashboard.new prison_jobs(formatted_vacancies), youth_custody_jobs(formatted_vacancies), bad_record_count
+  # PushToDashboard.new prison_jobs(formatted_vacancies), youth_custody_jobs(formatted_vacancies), bad_record_count
 end
 def summary_file(formatted_vacancies)
   File.open('summary.csv', 'w') do |file|
