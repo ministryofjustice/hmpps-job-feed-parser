@@ -18,6 +18,9 @@ Parameters:
   TaskRoleArn:
     Description: "ARN for task task-schedular"
     Type: String
+  SlackUrl:
+    Description: "Slack webhook url for alerts to slack"
+    Type: String
 Mappings:
   EnvironmentMap:
     development:
