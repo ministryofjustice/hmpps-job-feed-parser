@@ -1368,6 +1368,11 @@
   :lat: 51.8225809
   :lng: -0.8016525999999999
   :type: Prison
+- :name: HMP Aylesbury
+  :town: Aylesbury
+  :lat: 51.8225809
+  :lng: -0.8016525999999999
+  :type: Prison
 - :name: HMYOI Deerbolt
   :town: Barnard Castle
   :lat: 54.5432115
