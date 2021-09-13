@@ -62,7 +62,6 @@ HMP Sudbury
 HMP Swaleside
 HMP Thameside
 HMP The Mount
-HMP The Verne
 HMP Usk
 HMP Usk & HMP/YOI Prescoed
 HMP Wakefield
@@ -126,10 +125,11 @@ HMYOI Feltham
 HMYOI Werrington
 HMYOI Wetherby
 IRC Morton Hall
+IRC The Verne
+IRC Verne
 Medway STC
 Oakhill STC
 Rainsbrook STC
-The Verne
 Vinney Green
 HMP/YOI Elmley
 Lincolnshire
