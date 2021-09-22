@@ -53,7 +53,7 @@ Resources:
           - Name: SLACK_AVATAR  
             Value: ":ppjfeedok:"
           - Name: SLACK_URL
-            Value: "https://hooks.slack.com/services/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"  
+            Value: "https://hooks.slack.com/services/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"
           Essential: 'true'
           Image: !Ref DockerImage
           Memory: !Ref Memory

@@ -39,7 +39,7 @@ Mappings:
       Hostname: prod.wp.dsd.io
       AWSLogGroup: wp-production
       ECSCluster: wp-production
-      Folder: prod/
+      Folder: /
 Resources:
   ##
   # ECS task & service
@@ -56,7 +56,7 @@ Resources:
           - Name: SLACK_AVATAR  
             Value: ":ppjfeedok:"
           - Name: SLACK_URL
-            Value: !Ref SlackUrl  
+            Value: "https://hooks.slack.com/services/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"
           Essential: 'true'
           Image: !Ref DockerImage
           Memory: !Ref Memory
