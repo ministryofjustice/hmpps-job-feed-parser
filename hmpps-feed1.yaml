@@ -53,7 +53,7 @@ Resources:
           - Name: SLACK_AVATAR  
             Value: ":ppjfeedok:"
           - Name: SLACK_URL
-            Value: "https://hooks.slack.com/services/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"
+            Value: "https://hooks.slack.com/services/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"  
           Essential: 'true'
           Image: !Ref DockerImage
           Memory: !Ref Memory
@@ -96,7 +96,7 @@ Resources:
     Type: AWS::Events::Rule
     Properties:
       Description: !Sub 'Execute the task once each nightr the HMPPS Job Feed Parser should have executed.'
-      ScheduleExpression: cron(0 0/12 * * ? *)
+      ScheduleExpression: cron(* * * * ? *)
       State: ENABLED
       Targets:
         - Arn: !Sub 
