@@ -96,7 +96,7 @@ Resources:
     Type: AWS::Events::Rule
     Properties:
       Description: !Sub 'Execute the task once each nightr the HMPPS Job Feed Parser should have executed.'
-      ScheduleExpression: cron(* * * * ? *)
+      ScheduleExpression: cron(0 0/12 * * ? *)
       State: ENABLED
       Targets:
         - Arn: !Sub 
