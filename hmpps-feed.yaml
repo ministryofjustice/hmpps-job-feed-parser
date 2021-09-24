@@ -39,7 +39,7 @@ Mappings:
       Hostname: prod.wp.dsd.io
       AWSLogGroup: wp-production
       ECSCluster: wp-production
-      Folder: /
+      Folder: 
 Resources:
   ##
   # ECS task & service
